@@ -7,8 +7,45 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  Student
 } from './definitions';
 import { formatCurrency } from './utils';
+
+
+
+export async function fetchStudents() {
+  try {
+    const data = await sql<Student>`SELECT COUNT(*) FROM students;`;
+
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error: ', error);
+    throw new Error('Failed to fetch student data');
+  }
+}
+
+export async function fetchMySaebrsData() {
+  try {
+    // const data = await sql<Student>`SELECT COUNT(*) FROM students WHERE saebrs_emo='high';`;
+    const emoHigh = await sql`SELECT COUNT(*) FROM students WHERE mysaebrs_emo = 'high'`;
+    const socHigh = await sql`SELECT COUNT(*) FROM students WHERE mysaebrs_soc = 'high'`;
+    const acaHigh = await sql`SELECT COUNT(*) FROM students WHERE mysaebrs_aca = 'high'`;
+    
+    const emo = Number(emoHigh.rows[0].count);
+    const soc = Number(socHigh.rows[0].count);
+    const aca = Number(acaHigh.rows[0].count);
+
+    return {
+      emo,
+      soc,
+      aca
+    };
+  } catch (error) {
+    console.error('Database Error: ', error);
+    throw new Error('Failed to fetch student data');
+  }
+}
+
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.

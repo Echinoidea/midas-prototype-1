@@ -3,7 +3,13 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
+  FaceSmileIcon,
+  AcademicCapIcon,
+  UsersIcon
 } from '@heroicons/react/24/outline';
+
+
+
 import { lusitana } from '@/app/ui/fonts';
 
 const iconMap = {
@@ -11,6 +17,9 @@ const iconMap = {
   customers: UserGroupIcon,
   pending: ClockIcon,
   invoices: InboxIcon,
+  emotional: FaceSmileIcon,
+  social: UsersIcon,
+  academic: AcademicCapIcon,
 };
 
 export default async function CardWrapper() {
@@ -37,7 +46,7 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  type: 'invoices' | 'customers' | 'pending' | 'collected' | 'emotional' | 'social' | 'academic';
 }) {
   const Icon = iconMap[type];
 

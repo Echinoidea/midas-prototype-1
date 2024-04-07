@@ -4,8 +4,60 @@ const {
   customers,
   revenue,
   users,
+  students
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
+
+
+async function seedStudents(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS students (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        school TEXT NOT NULL,
+        odr TEXT NOT NULL,
+        suspensions TEXT NOT NULL,
+        gender TEXT NOT NULL,
+        ethnicity TEXT NOT NULL,
+        english_learner BOOLEAN NOT NULL,
+        grade TEXT NOT NULL,
+        mysaebrs_emo TEXT NOT NULL,
+        mysaebrs_soc TEXT NOT NULL,
+        mysaebrs_aca TEXT NOT NULL,
+        saebrs_emo TEXT NOT NULL,
+        saebrs_soc TEXT NOT NULL,
+        saebrs_aca TEXT NOT NULL, 
+        read_risk TEXT NOT NULL,
+        math_risk TEXT NOT NULL
+      );
+    `;
+
+    console.log(`Created "students" table`);
+
+    const insertedStudents = await Promise.all(
+      students.map(
+        (student) => client.sql`
+          INSERT INTO students (id, school, odr, suspensions, gender, ethnicity, english_learner, grade, mysaebrs_emo, mysaebrs_soc, mysaebrs_aca, saebrs_emo, saebrs_soc, saebrs_aca, read_risk, math_risk)
+          VALUES (${student.id}, ${student.school}, ${student.odr}, ${student.suspensions}, ${student.gender}, ${student.ethnicity}, ${false}, ${student.grade}, ${student.mysaebrs_emo}, ${student.mysaebrs_soc}, ${student.mysaebrs_aca}, ${student.saebrs_emo}, ${student.saebrs_soc}, ${student.saebrs_aca}, ${student.read_risk}, ${student.math_risk})
+          ON CONFLICT (id) DO NOTHING; 
+        `
+      )
+    );
+
+    console.log(`Seeded ${insertedStudents.length} students`);
+
+    return {
+      createTable,
+      students: insertedStudents,
+    };
+  } catch (error) {
+    console.error('Error seeding students:', error);
+    throw error;
+  }
+}
+
 
 async function seedUsers(client) {
   try {
@@ -167,6 +219,7 @@ async function main() {
   await seedCustomers(client);
   await seedInvoices(client);
   await seedRevenue(client);
+  await seedStudents(client);
 
   await client.end();
 }
