@@ -5,8 +5,9 @@ const users = [
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
     name: 'User',
     email: 'user@nextmail.com',
-    password: '123456',
+    password: '123456'
   },
+
 ];
 
 const customers = [
@@ -236,6 +237,8 @@ const students = [
     math_risk: 'high'
   }
 ];
+
+
 
 module.exports = {
   users,

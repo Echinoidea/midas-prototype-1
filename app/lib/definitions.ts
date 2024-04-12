@@ -118,6 +118,11 @@ export type CustomerField = {
   name: string;
 };
 
+export type SchoolField = {
+  id: string;
+  name: string;
+};
+
 export type InvoiceForm = {
   id: string;
   customer_id: string;

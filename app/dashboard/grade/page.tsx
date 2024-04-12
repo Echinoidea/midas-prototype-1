@@ -23,7 +23,7 @@ export default async function Page() {
     return (
         <main>
         <h1 className={`mb-4 text-xl md:text-2xl`}>
-            Classroom-level Dashboard
+            Grade-level Dashboard
             {/* {selectedSchool} */}
         </h1>
         <div className="mb-4 rounded-md">

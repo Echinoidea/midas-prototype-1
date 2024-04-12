@@ -23,11 +23,11 @@ export default async function Page() {
     return (
         <main>
         <h1 className={`mb-4 text-xl md:text-2xl`}>
-            Classroom-level Dashboard
+            School-level Dashboard
             {/* {selectedSchool} */}
         </h1>
         <div className="mb-4 rounded-md">
-            {/* <SchoolSearch schools={schools}></SchoolSearch> */}
+            <SchoolSearch schools={schools}></SchoolSearch>
         </div>
         <div className="flex flex-row mb-4 rounded-md">
             <div className='flex flex-col basis-1/4 mr-4'>

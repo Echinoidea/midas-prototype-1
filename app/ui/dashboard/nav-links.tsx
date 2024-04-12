@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  AcademicCapIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -14,18 +15,25 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'School', 
-    href: '/dashboard',
+    href: '/dashboard/school',
     icon: HomeIcon },
+
+  { name: 'Grade', 
+    href: '/dashboard/grade', 
+    icon: AcademicCapIcon 
+  },
+  
+  { name: 'Classroom', 
+    href: '/dashboard/classroom', 
+    icon: UserGroupIcon 
+  },
 
   { name: 'Student',
     href: '/dashboard/student',
     icon: UserIcon,
   },
 
-  { name: 'Classroom', 
-    href: '/dashboard/classroom', 
-    icon: UserGroupIcon 
-  },
+  
 ];
 
 export default function NavLinks() {

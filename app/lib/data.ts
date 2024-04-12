@@ -7,17 +7,21 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
-  Student
+  Student,
+  SchoolField
 } from './definitions';
 import { formatCurrency } from './utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 
 
-export async function fetchStudents() {
+export async function fetchStudents(schoolName: string) {
+  noStore();
+
   try {
-    const data = await sql<Student>`SELECT COUNT(*) FROM students;`;
+    const data = await sql`SELECT COUNT(id) FROM students WHERE school=${schoolName}`;
 
-    return data.rows;
+    return data.rows[0].count;
   } catch (error) {
     console.error('Database Error: ', error);
     throw new Error('Failed to fetch student data');
@@ -25,6 +29,8 @@ export async function fetchStudents() {
 }
 
 export async function fetchMySaebrsData() {
+  noStore();
+
   try {
     // const data = await sql<Student>`SELECT COUNT(*) FROM students WHERE saebrs_emo='high';`;
     const emoHigh = await sql`SELECT COUNT(*) FROM students WHERE mysaebrs_emo = 'high'`;
@@ -203,6 +209,25 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchSchools() {
+  try {
+    const data = await sql<SchoolField>`
+      SELECT
+        id,
+        school AS name
+      FROM students
+      ORDER BY school ASC
+    `;
+
+    const schools = data.rows;
+    console.log(schools);
+    return schools;
+  } catch (err) {
+    console.error('Database error: ', err);
+    throw new Error('Failed to fetch all schools');
   }
 }
 
