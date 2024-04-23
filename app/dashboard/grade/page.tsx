@@ -1,18 +1,14 @@
 import { CardInterior, CardSaebrsSummary, SaebrsCardSplitInterior, CardSplitValue, CardSingleValue } from '@/app/ui/dashboard/cards';
-import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense, useState } from 'react';
 import { sql } from '@vercel/postgres';
 import { RevenueChartSkeleton } from '../../ui/skeletons';
-import { fetchRevenue, fetchLatestInvoices, fetchCardData, fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
+import { fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
 import SchoolSearch from '../../ui/dashboard/school-search';
 
  
 export default async function Page() {
     // const revenue = await fetchRevenue();
-    const latestInvoices = await fetchLatestInvoices();
-    const numberOfCustomers = (await fetchCardData()).numberOfCustomers;
     const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
     const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
     const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;

@@ -1,45 +1,72 @@
-import { CardSaebrsSummary, CardSplitValue, CardSingleValue} from '@/app/ui/dashboard/cards';
-import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import { lusitana } from '@/app/ui/fonts';
+import { CardSaebrsSummary, CardMidasRisk} from '@/app/ui/dashboard/cards';
 import { Suspense, useState } from 'react';
 import { sql } from '@vercel/postgres';
-import { RevenueChartSkeleton } from '../../ui/skeletons';
-import { fetchRevenue, fetchLatestInvoices, fetchCardData, fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
-import SchoolSearch from '../../ui/dashboard/school-search';
+import { fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
+import StudentSearch from '../../ui/dashboard/student-search';
+import {
+  UserCircleIcon
+} from '@heroicons/react/24/outline';
+
+import EpUser from '@/app/ui/icons/EpUser';
+import QuillUserHappy from '@/app/ui/icons/QuillUserHappy';
+import CircumUser from '@/app/ui/icons/CircumUser';
+import { CardTripleStack } from '@/app/ui/dashboard/cards';
+import { ConfidenceIntervalVisualizer } from '@/app/ui/dashboard/confidence-visualizer';
+
 
  
 export default async function Page() {
-    // const revenue = await fetchRevenue();
-    const latestInvoices = await fetchLatestInvoices();
-    const numberOfCustomers = (await fetchCardData()).numberOfCustomers;
     const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
     const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
     const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
     const schools = await fetchSchools();
-    // const selectedSchool = GetSelectedSchool();
     const numberOfStudents = await fetchStudents("Greco Middle School");
 
     return (
         <main>
         <h1 className={`mb-4 text-xl md:text-2xl`}>
             Student-level Dashboard
-            {/* {selectedSchool} */}
         </h1>
-        <div className="mb-4 rounded-md">
-            {/* Student Search here */}
-            {/* <SchoolSearch schools={schools}></SchoolSearch> */}
+        
+        <div className='flex flex-row mb-8'>
+          <div className='flex flex-col basis-1/3 items-center pr-4'>
+            <StudentSearch></StudentSearch>
+            <div className="border-solid border-gray-500 shadow-md border-2 h-52 w-52">
+              <UserCircleIcon className=" text-gray-700 subpixel-antialiased" />
+              {/* <QuillUserHappy className=" text-gray-700 subpixel-antialiased w-full h-full" /> */}
+            </div>
+          </div>
+
+          <div className='flex flex-col basis-1/3 pl-4 pr-4'>
+            <CardTripleStack title={'Student Information'} subtitles={['Student ID', 'Grade', 'Classroom ID']} values={['GSHS-12-31147501', '12', 'C16']} capitalize={false}/>
+          </div>
+
+          <div className='flex flex-col basis-1/3 pl-4'>
+            <CardTripleStack title={'Student Demographics'} subtitles={['Gender', 'Ethnicity', 'English Learner?']} values={['Male', 'Hispanic', 'Yes']} capitalize={false}/>
+          </div>
         </div>
+        
+
+        
+
         <div className='flex flex-col'>
             <div className='flex flex-row'>
               <div className='basis-1/4 pr-4'>
-                <CardSingleValue capitalize={true} type='string' title="MIDAS Risk" value={'some'}/>
+                <CardMidasRisk capitalize={true} type='string' title="MIDAS Risk" confidence={95} CiThresholds={[85, 90, 95, 99]} value={'some'}/>
               </div>
-              <div className='basis-3/4 pr-4'>
+              <div className='basis-3/4'>
                 <CardSaebrsSummary title={"Risk Scores"} emotional={['high', 'some']} social={['low', 'some']} academic={['some', 'high']}/>
               </div>
               
             </div>
+
+        </div>
+        </main>
+    );
+}
+
+
+/*
 
             <div className='flex flex-row pt-4 pr-4'>
                 <div className='basis-1/5 pr-2'>
@@ -63,13 +90,7 @@ export default async function Page() {
                   <CardSingleValue capitalize={false} type='string' title="English Learner" value={'Not an ELL'}/>
                 </div>
             </div>
-        </div>
-        </main>
-    );
-}
-
-
-
+*/
 
 
 /*

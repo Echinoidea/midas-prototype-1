@@ -1,61 +1,55 @@
-import { CardInterior, CardSaebrsSummary, SaebrsCardSplitInterior, CardSplitValue, CardSingleValue } from '@/app/ui/dashboard/cards';
-import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import { lusitana } from '@/app/ui/fonts';
-import { Suspense, useState } from 'react';
-import { sql } from '@vercel/postgres';
+import { CardSaebrsSummary, CardSplitValue, CardSingleValue, CardSingleValueTooltip, CardMidasRisk } from '@/app/ui/dashboard/cards';
 import { RevenueChartSkeleton } from '../../ui/skeletons';
-import { fetchRevenue, fetchLatestInvoices, fetchCardData, fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
+import { fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
 import SchoolSearch from '../../ui/dashboard/school-search';
 
- 
-export default async function Page() {
-    // const revenue = await fetchRevenue();
-    const latestInvoices = await fetchLatestInvoices();
-    const numberOfCustomers = (await fetchCardData()).numberOfCustomers;
-    const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
-    const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
-    const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
-    const schools = await fetchSchools();
-    // const selectedSchool = GetSelectedSchool();
-    const numberOfStudents = await fetchStudents("Greco Middle School");
 
-    return (
-        <main>
-        <h1 className={`mb-4 text-xl md:text-2xl`}>
-            School-level Dashboard
-            {/* {selectedSchool} */}
-        </h1>
-        <div className="mb-4 rounded-md">
-            <SchoolSearch schools={schools}></SchoolSearch>
+export default async function Page() {
+  const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
+  const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
+  const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
+  const schools = await fetchSchools();
+  const numberOfStudents = await fetchStudents("Greco Middle School");
+
+  return (
+    <main>
+      <h1 className={`mb-4 text-xl md:text-2xl`}>
+        School-level Dashboard
+        {/* {selectedSchool} */}
+      </h1>
+      <div className='flex flex-col'>
+        <div className="mb-4 rounded-md -mr-2">
+          <SchoolSearch schools={schools}></SchoolSearch>
         </div>
         <div className="flex flex-row mb-4 rounded-md">
-            <div className='flex flex-col basis-1/4 mr-4'>
-                <div className='pb-4'>
-                    <CardSingleValue capitalize={true} type='string' title="Total Students" value={400}/>
-                </div>
-                
-                <div className='pb-4'>
-                    <CardSingleValue capitalize={true} type='string' title="Most Frequent MIDAS Risk" value={'some'}/>
-                </div>
-
-                <div className='pb-4'>
-                    <CardSplitValue title="Most Frequent Test Score Risk" values={['some', 'low']} subtitles={['Math', 'Reading']}/>
-                </div>
-
-                <div className='pb-4'>
-                    <CardSplitValue title="Disciplinary Action Summary" values={['one+', 'zero']} subtitles={['To Office', 'Suspensions']}/>
-                </div>
+          <div className='flex-col mr-4'>
+            <div className='pb-4'>
+              <CardSingleValue capitalize={true} type='string' title="Total Students" value={400} />
             </div>
 
-            <div className='basis-3/4'>
-                <CardSaebrsSummary title={'Most Frequent Risk Scores'} emotional={['high', 'some']} social={['low', 'some']} academic={['some', 'high']}/>
+            <div className='pb-4'>
+            <CardMidasRisk capitalize={true} type='string' title="MIDAS Risk" confidence={95} CiThresholds={[85, 90, 95, 99]} value={'some'}/>
             </div>
-            
-        </div>
 
-        </main>
-    );
+            <div className='pb-4'>
+              <CardSplitValue title="Most Frequent Test Score Risk" values={['na', 'low']} subtitles={['Math', 'Reading']} />
+            </div>
+
+            <div className='pb-4'>
+              <CardSplitValue title="Disciplinary Action Summary" values={['one+', 'zero']} subtitles={['To Office', 'Suspensions']} />
+            </div>
+          </div>
+
+          <div className=''>
+            <CardSaebrsSummary title={'Most Frequent Risk Scores'} emotional={['high', 'some']} social={['some', 'some']} academic={['some', 'high']} />
+          </div>
+
+        </div>  
+      </div>
+
+
+    </main>
+  );
 }
 
 /*

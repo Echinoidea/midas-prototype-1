@@ -6,17 +6,12 @@ import {
   AcademicCapIcon
 } from '@heroicons/react/24/outline';
 import { useState } from 'react';
-// const [selectedSchool, setSelectedSchool] = useState('');
-
-// export function GetSelectedSchool() {
-//     return selectedSchool;
-// }
 
 export default function SchoolSearch({ schools }: { schools: SchoolField[] }) {
     const [selectedSchool, setSelectedSchool] = useState('');
 
     return (
-        <div className="rounded-md w-full bg-gray-50 p-4 md:p-6">
+        <div className="rounded-md w-full bg-zinc-100 p-4 md:p-6">
             <div className="mb-4">
             <label htmlFor="school" className="mb-2 block text-sm font-medium">
                 Choose school
