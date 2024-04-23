@@ -1,21 +1,28 @@
+'use client';
+
 import { CardSaebrsSummary, CardSplitValue, CardSingleValue, CardSingleValueTooltip, CardMidasRisk } from '@/app/ui/dashboard/cards';
 import { RevenueChartSkeleton } from '../../ui/skeletons';
 import { fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
 import SchoolSearch from '../../ui/dashboard/school-search';
+import { GeistProvider, CssBaseline } from '@geist-ui/core'
+import {Tooltip} from '@geist-ui/core';
 
 
 export default async function Page() {
-  const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
-  const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
-  const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
+  // const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
+  // const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
+  // const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
   const schools = await fetchSchools();
-  const numberOfStudents = await fetchStudents("Greco Middle School");
+  // const numberOfStudents = await fetchStudents("Greco Middle School");
 
   return (
     <main>
       <h1 className={`mb-4 text-xl md:text-2xl`}>
         School-level Dashboard
         {/* {selectedSchool} */}
+        {/* <Tooltip text="The Evil Rabbit Jumped over the Fence">
+          <span>Top</span>
+        </Tooltip> */}
       </h1>
       <div className='flex flex-col'>
         <div className="mb-4 rounded-md -mr-2">
