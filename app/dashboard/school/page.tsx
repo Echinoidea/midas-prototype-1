@@ -1,54 +1,82 @@
 'use client';
 
-import { CardSaebrsSummary, CardSplitValue, CardSingleValue, CardSingleValueTooltip, CardMidasRisk } from '@/app/ui/dashboard/cards';
-import { RevenueChartSkeleton } from '../../ui/skeletons';
-import { fetchMySaebrsData, fetchSchools, fetchStudents } from '@/app/lib/data';
-import SchoolSearch from '../../ui/dashboard/school-search';
-import { GeistProvider, CssBaseline } from '@geist-ui/core'
-import {Tooltip} from '@geist-ui/core';
+import { CardThreeValue} from '@/app/ui/dashboard/cards';
+import { SaebrsSummary } from '@/app/ui/dashboard/cards/population/saebrs-summary';
+import { GenderPopulationToRiskChartGroup } from '@/app/ui/dashboard/cards/population/demographics-summary';
+import { CardDisciplinarySummary } from '@/app/ui/dashboard/cards/population/disciplinary-summary';
+import { CardTestScoreSummary } from '@/app/ui/dashboard/cards/population/test-scores-summary';
+import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
+
 
 
 export default async function Page() {
   // const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
   // const mySaebrsSocHigh = (await fetchMySaebrsData()).soc;
   // const mySaebrsAcaHigh = (await fetchMySaebrsData()).aca;
-  const schools = await fetchSchools();
+  // const schools = await fetchSchools();
   // const numberOfStudents = await fetchStudents("Greco Middle School");
 
   return (
     <main>
-      <h1 className={`mb-4 text-xl md:text-2xl`}>
-        School-level Dashboard
-        {/* {selectedSchool} */}
-        {/* <Tooltip text="The Evil Rabbit Jumped over the Fence">
-          <span>Top</span>
-        </Tooltip> */}
-      </h1>
+
       <div className='flex flex-col'>
         <div className="mb-4 rounded-md -mr-2">
-          <SchoolSearch schools={schools}></SchoolSearch>
+          {/* <SchoolSearch schools={schools}></SchoolSearch> */}
         </div>
+
         <div className="flex flex-row mb-4 rounded-md">
-          <div className='flex-col mr-4'>
-            <div className='pb-4'>
-              <CardSingleValue capitalize={true} type='string' title="Total Students" value={400} />
+          <div className='flex flex-col mr-4'>
+            
+
+            <div className='pb-4 w-96'>
+              <CardThreeValue 
+                title="Percentage of Students at Risk" 
+                values={['60%', '30%', '10%']} 
+                subtitles={['Low', 'Some', 'High']} 
+                tooltipText='Percentages of students at the three different MIDAS risk levels.' />
             </div>
 
-            <div className='pb-4'>
-            <CardMidasRisk capitalize={true} type='string' title="MIDAS Risk" confidence={95} CiThresholds={[85, 90, 95, 99]} value={'some'}/>
+             <div className='pb-4 w-96'>
+              <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]}/>
             </div>
 
-            <div className='pb-4'>
-              <CardSplitValue title="Most Frequent Test Score Risk" values={['na', 'low']} subtitles={['Math', 'Reading']} />
+            <div className='pb-4 w-96'>
+              <CardDisciplinarySummary
+                title={'Disciplinary Action Summary'} 
+                valuesTop={['77%', '23%']} 
+                subtitlesTop={['Zero', 'One Plus']} 
+                valuesBottom={['80%', '20%']}
+                subtitlesBottom={['Zero', 'One Plus']}            
+              />
             </div>
 
-            <div className='pb-4'>
-              <CardSplitValue title="Disciplinary Action Summary" values={['one+', 'zero']} subtitles={['To Office', 'Suspensions']} />
+            <div className='pb-4 w-96'>
+              <CardTestScoreSummary
+                title={'Math Score Risk Summary'} 
+                valuesTop={['60%', '40%']} 
+                subtitlesTop={['Value1', 'Value2']} 
+                valuesBottom={['55%', '45%']}
+                subtitlesBottom={['Value1', 'Value2']}            
+              />
             </div>
+
           </div>
 
-          <div className=''>
-            <CardSaebrsSummary title={'Most Frequent Risk Scores'} emotional={['high', 'some']} social={['some', 'some']} academic={['some', 'high']} />
+          <div className='flex flex-col'>
+            
+            <div className='pb-4'>
+              <SaebrsSummary 
+                saebrsTotal={['60%', '25%', '15%']} 
+                mySaebrsTotal={['54%', '33%', '13%']} 
+                saebrsEmotional={['59%', '33%', '8%']} 
+                mySaebrsEmotional={['50%', '37%', '13%']} 
+                saebrsSocial={['40%', '41%', '19%']} 
+                mySaebrsSocial={['40%', '39%', '17%']} 
+                saebrsAcademic={['72%', '16%', '12%']} 
+                mySaebrsAcademic={['70%', '18%', '12%']}
+              />
+            </div>
+              <GenderPopulationToRiskChartGroup/>
           </div>
 
         </div>  
@@ -59,23 +87,3 @@ export default async function Page() {
   );
 }
 
-/*
-<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <Card title="Emotional" value={mySaebrsEmoHigh} type="emotional" />
-            <Card title="Social" value={mySaebrsSocHigh} type="social" />
-            <Card title="Academic" value={mySaebrsAcaHigh} type="academic" />
-            <Card
-            title="Total Students"
-            value={numberOfStudents}
-            type="customers"
-            />
-        </div>
-        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-            <Suspense fallback={<RevenueChartSkeleton/>}>
-                <RevenueChart/>
-            </Suspense>
-            
-            <LatestInvoices latestInvoices={latestInvoices} /> 
-            
-            </div>
-*/
