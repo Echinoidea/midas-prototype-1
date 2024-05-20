@@ -1,43 +1,77 @@
-import { EnglishLearnerAtRiskChart, EthnicityAtRiskChart, GenderAtRiskChart } from "../../../charts/risk-demographics-charts";
-import { DonutChartEnglishLearner, DonutChartEthnicity, DonutChartGender } from "../../../charts/total-demographics-charts";
 
-export function GenderPopulationToRiskChartGroup({
+import { Key, useState } from "react";
+import { BarChartEnglishLearner, BarChartEthnicity, DonutChartGender } from "../../../charts/total-demographics-charts";
+import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem, Card } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Nunito } from "next/font/google";
+const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
-}: {
+function Capitalize(str: string){
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
-}) {
+
+export function PopToRiskCharts() {
+  const [ genderRiskSample, setGenderRiskSample ] = useState('high')
+  const [ ethnicityRiskSample, setEthnicityRiskSample ] = useState('high')
+  const [ ellRiskSample, setEllRiskSample ] = useState('high')
+
   return (
     // Main div
-    <div className='flex flex-row'>
-      <div className='flex flex-col bg-zinc-100 items-center mr-2 rounded-xl shadow-md basis-1/3'>
-        <div className='py-10 scale-125'>
-          <DonutChartGender/>
+    <div className={`${nunito.className} flex flex-row min-h-max h-max basis-full`}>
+      
+      
+      <Card className='bg-neutral-100 mr-2 pb-7 -mb-4  basis-1/3 rounded-xl' shadow='md'>
+        <p className={`pl-2 -mb-8 text-xl`}>Gender and Risk</p>
+        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
+          <DonutChartGender />
         </div>
-        
-        <div className='pt-10 pb-6 scale-125'>
-          <GenderAtRiskChart/>
-        </div>
-      </div>
+      </Card>
+      
+      
 
-      <div className='flex flex-col bg-zinc-100 items-center mr-2 rounded-xl shadow-md basis-1/3'>
-        <div className='py-10 scale-125'>
-          <DonutChartEthnicity/>
+      <Card className='bg-neutral-100 mr-2  pb-7 -mb-4 basis-1/3 rounded-xl' shadow='md'>
+        <p className={`pl-2 -mb-8 text-xl font-sans`}>English Learner Status and Risk</p>
+        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
+          <BarChartEnglishLearner/>
         </div>
-        
-        <div className='pt-10 pb-6 scale-125'>
-          <EthnicityAtRiskChart/>
-        </div>
-      </div>
+      </Card>
 
-      <div className='flex flex-col bg-zinc-100 items-center mr-2 rounded-xl shadow-md basis-1/3'>
-        <div className='py-10 scale-125'>
-          <DonutChartEnglishLearner/>
+      <Card className='bg-neutral-100 mr-2  pb-7 -mb-4 basis-1/3 rounded-xl' shadow='md'>
+        <p className={`pl-2 -mb-8 text-xl font-sans`}>Ethnicity and Risk</p>
+        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
+          <BarChartEthnicity/>
         </div>
-        
-        <div className='pt-10 pb-6 scale-125'>
-          <EnglishLearnerAtRiskChart/>
+      </Card>
+{/* 
+      <Card className='bg-neutral-100 mr-2 basis-1/3 rounded-xl' shadow='md'>
+        <p className={`pl-2 -mb-8 text-xl font-sans`}>English Learner Status and Risk</p>
+        <div className='flex flex-col items-center'>
+          <div className={`pt-10 pb-5 scale-125`}>
+            <DonutChartEnglishLearner/>
+          </div>
+          
+          <div className='flex flex-col pb-2 mt-4 scale-125'>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button variant="bordered">
+                  Select risk level sample
+                </Button>
+              </DropdownTrigger>
+
+              <DropdownMenu onAction={(key: Key) => setEllRiskSample(key.toString())}>
+                <DropdownItem key='high'>High</DropdownItem>
+                <DropdownItem key='some'>Some</DropdownItem>
+                <DropdownItem key='low'>Low</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+
+            <div className={`-mt-4`}>
+              <EnglishLearnerAtRiskChart label={'At ' + Capitalize(ellRiskSample) + ' Risk'}/>
+            </div>
+          </div>
         </div>
-      </div>
+      </Card> */}
     </div>
   );
 }

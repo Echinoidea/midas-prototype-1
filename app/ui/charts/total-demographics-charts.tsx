@@ -1,93 +1,110 @@
-import { DonutChart, Card, Legend } from '@tremor/react'
+import { DonutChart, Card, Legend, BarChart } from '@tremor/react'
 import exp from 'constants'
  
 
 const genderDataPlaceholder = [
   {
     Gender: 'Male',
-    Count: 530
+    'Total': 530,
+    'High Risk': 70,
+    'Some Risk': 200,
+    'Low Risk': 180
   },
   {
     Gender: 'Female',
-    Count: 550
+    'Total': 550,
+    'High Risk': 30,
+    'Some Risk': 56,
+    'Low Risk': 300
   }
 ]
 
 const ethnicityDataPlaceholder = [
   {
     Ethnicity: 'White',
-    Count: 338
+    'High Risk': 58,
+    'Some Risk': 200,
+    'Low Risk': 100
   },
   {
     Ethnicity: 'Hispanic',
-    Count: 370
+    'High Risk': 20,
+    'Some Risk': 150,
+    'Low Risk': 130
   },
   {
     Ethnicity: 'Other POC',
-    Count: 372
+    'High Risk': 33,
+    'Some Risk': 156,
+    'Low Risk': 200
   }
 ]
 
 const englishLearnerDataPlaceholder = [
   {
     ELL: 'ELL',
-    Count: 200
+    'High Risk': 58,
+    'Some Risk': 200,
+    'Low Risk': 100
   },
   {
     ELL: 'Not ELL',
-    Count: 880
+    'High Risk': 20,
+    'Some Risk': 150,
+    'Low Risk': 130
   }
 ]
 
+const colors = ['rose-500', 'yellow-400', 'green-500']
+
 export function DonutChartGender() {
   return (
-    <Card className='min-w-full w-52 border-transparent ring-transparent bg-transparent'>
-        <DonutChart
-          data={genderDataPlaceholder}
-          index="Gender"
-          category="Count"
-          label='Total Gender'
-          showAnimation={true}
-          animationDuration={500}
-          colors={['sky-300', 'rose-300']}
-          
-        />
-      </Card>
-  )
-}
 
-export function DonutChartEthnicity() {
-  return (
-
-    <Card className='min-w-full w-52 border-transparent ring-transparent bg-transparent'>
+      <BarChart
+        className='min-h-full h-max'
+        data={genderDataPlaceholder}
+        index='Gender'
+        categories={['High Risk', 'Some Risk', 'Low Risk']}
+        colors={colors}
+        layout='horizontal'
+        yAxisWidth={50}
+        stack={true}
         
-        <DonutChart
-          data={ethnicityDataPlaceholder}
-          index="Ethnicity"
-          category="Count"
-          label='Total Ethnicity'
-          showAnimation={true}
-          animationDuration={500}
-          colors={['yellow-300', 'purple-300', 'green-400']}
-        />
-      </Card>
+      />
+
   )
 }
 
-export function DonutChartEnglishLearner() {
+export function BarChartEthnicity() {
   return (
 
-    <Card className=' min-w-full w-52 border-transparent ring-transparent bg-transparent'>
-    <DonutChart
+      <BarChart
+        className='min-h-full h-max'
+        data={ethnicityDataPlaceholder}
+        index='Ethnicity'
+        categories={['High Risk', 'Some Risk', 'Low Risk']}
+        colors={colors}
+        layout='horizontal'
+        yAxisWidth={50}
+        stack={true}
+        
+      />
+  )
+}
+
+export function BarChartEnglishLearner() {
+  return (
+
+    <BarChart
+      className='min-h-full h-max'
       data={englishLearnerDataPlaceholder}
-      index="ELL"
-      category="Count"
-      label='Total ELL'
-      showAnimation={true}
-      animationDuration={500}
-      colors={['green-400', 'zinc-300']}
+      index='ELL'
+      categories={['High Risk', 'Some Risk', 'Low Risk']}
+      colors={colors}
+      layout='horizontal'
+      yAxisWidth={50}
+      stack={true}
     />
-  </Card>
   )
 }
 

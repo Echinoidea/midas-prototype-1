@@ -1,5 +1,9 @@
+
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
+
+const {nextui} = require("@nextui-org/react");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const config: Config = {
   content: [
@@ -7,10 +11,14 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     transparent: 'transparent',
     extend: {
+      fontFamily: {
+        'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
+      },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
       },
@@ -92,6 +100,9 @@ const config: Config = {
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
     },
   ],
-  plugins: [require('@tailwindcss/forms'), require('@headlessui/tailwindcss')],
+  plugins: [require('@tailwindcss/forms'), require('@headlessui/tailwindcss'), nextui()],
 };
+
+// tailwind.config.js
+
 export default config;

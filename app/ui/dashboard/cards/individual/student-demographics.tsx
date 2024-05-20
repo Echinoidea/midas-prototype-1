@@ -4,7 +4,7 @@ import { nunito } from '@/app/ui/fonts';
 import React from 'react';
 import {  Tooltip } from '@geist-ui/core';
 
-import { DonutChartEnglishLearner, DonutChartEthnicity, DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
+import { BarChartEnglishLearner, BarChartEthnicity, DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
 
 export function CardStudentDemographics({
   title,
@@ -32,7 +32,7 @@ export function CardStudentDemographics({
           <Tooltip text = {<DonutChartGender/>} 
             placement='left' enterDelay={450} className='min-w-full'
           >
-            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 items-center '>
+            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 items-center shadow-sm'>
               <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{subtitles[0]}</p>
               <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
                 {capitalize ? values[0].toString().toUpperCase() : values[0].toString()}
@@ -41,10 +41,10 @@ export function CardStudentDemographics({
           </Tooltip>
 
           {/* CARD 2 --- ETHNICITY */}
-          <Tooltip text = {<DonutChartEthnicity/>} 
+          <Tooltip text = {<BarChartEthnicity/>} 
             placement='left' enterDelay={450} className='min-w-full'
           >
-            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center'>
+            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center shadow-sm'>
             <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{subtitles[1]}</p>
               <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
                 {capitalize ? values[1].toString().toUpperCase() : values[1].toString()}
@@ -53,10 +53,10 @@ export function CardStudentDemographics({
           </Tooltip>
 
           {/* CARD 3 --- ENGLISH LANGUAGE LEARNER */}
-          <Tooltip text = {<DonutChartEnglishLearner/>} 
+          <Tooltip text = {<BarChartEnglishLearner/>} 
             placement='left' enterDelay={450} className='min-w-full'
           >
-            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center'>
+            <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center shadow-sm'>
             <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{subtitles[2]}</p>
               <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
                 {capitalize ? values[2].toString().toUpperCase() : values[2].toString()}

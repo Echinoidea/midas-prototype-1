@@ -14,8 +14,10 @@ function MidasRisk({
 }) {
   return (
     <Tooltip text = {"MIDAS RISK TOOLTIP PLACEHOLDER"} placement='left' enterDelay={450} className='min-w-full'>
-      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 items-center '>
-        <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{'MIDAS Risk'}</p>
+      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 items-center shadow-sm'>
+        <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">
+          {'MIDAS Risk'}
+        </p>
         <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
           {midasRisk.toUpperCase()}
         </p>
@@ -33,8 +35,10 @@ function MissingVariables({
 }) {
   return (
     <Tooltip text = {"MISSING VARIABLES COUNT TOOLTIP PLACEHOLDER"} placement='left' enterDelay={450} className='min-w-full'>
-      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center'>
-      <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{"Missing Variables Count"}</p>
+      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center shadow-sm'>
+        <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">
+          {"Missing Variables Count"}
+        </p>
         <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
           {missingVariablesCount.toString()}
         </p>
@@ -54,11 +58,18 @@ function Confidence({
 }) {
   return (
     <Tooltip text = {""} placement='left' enterDelay={450} className='min-w-full'>
-      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center'>
-      <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{"Confidence"}</p>
-        <p className='font-semibold text-3xl text-slate-800 -mt-3 mb-auto justify-center'>
+      <div className='flex flex-col bg-zinc-50 rounded-xl h-20 mt-4 items-center shadow-sm'>
+        <p className="text-sm font-medium text-slate-800 mt-0 mb-auto ml-0 mr-auto">{"Confidence"}</p>
+        
+        <div className='justify-center -mt-1 mb-auto'>
+          <p className="text-3xl font-medium text-slate-800">
+            {confidence + '%'}
+          </p>
+        </div>
+        
+        <div className='pb-1 justify-center'>
           <ConfidenceIntervalVisualizer confidence={confidence} thresholds={confidenceThresholds}/>
-        </p>
+        </div>
       </div>
     </Tooltip>
   )

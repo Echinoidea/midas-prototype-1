@@ -128,7 +128,7 @@ export default async function Page() {
           </div>
           
           <div className='flex flex-col basis-1/4 mx-4 rounded-xl'>
-            <CardTestsAndDisciplineSummary title='Test' subtitlesTop={['1', '2']} subtitlesBottom={['3', '4']} valuesTop={['a', 'b']} valuesBottom={['c', 'd']}/>
+            <CardTestsAndDisciplineSummary title='Test' subtitlesTop={['Math', 'Reading']} subtitlesBottom={['ODR', 'Suspensions']} valuesTop={['LOW', 'SOME']} valuesBottom={['Zero', 'One+']}/>
           </div>
         </div>
 

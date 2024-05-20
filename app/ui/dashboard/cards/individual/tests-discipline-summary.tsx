@@ -17,7 +17,7 @@ function Interior({
   return (
     <div className={'flex flex-col bg-zinc-50 h-20 rounded-xl ' + padding}>
       {/* CONTENT ROW */}
-      <Text className={`${nunito.className} text-md ml-2`}> {title} </Text>
+      <p className={`${nunito.className} text-md ml-2`}> {title} </p>
       <div className="flex flex-row px-8 -mx-2">
       
         {/* LEFT COLUMN */}
@@ -91,11 +91,11 @@ export function CardTestsAndDisciplineSummary({
         {/* MAIN COLUMN */}
         <div className='flex flex-col'>
           {/* CARD 1 --- ODR */}
-          <Tooltip text={"Test Scores Tooltip"} placement='bottom' enterDelay={450} className='min-w-full'>
+          <Tooltip text={"Test Scores Tooltip"} placement='bottom' enterDelay={450} className='min-w-full shadow-sm'>
             <Interior title='Test Risk Scores' values={valuesTop} subtitles={subtitlesTop} padding='mb-2'/>
           </Tooltip>
           {/* CARD 2 --- SUSPENSIONS */}
-          <Tooltip text={"Discipline Tooltip"} placement='bottom' enterDelay={450} className='min-w-full'>
+          <Tooltip text={"Discipline Tooltip"} placement='bottom' enterDelay={450} className='min-w-full shadow-sm'>
             <Interior title='Disciplinary Risk Scores' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
           </Tooltip>
         </div>
@@ -103,80 +103,3 @@ export function CardTestsAndDisciplineSummary({
     </div>
   );
 }
-
-
-// 'use client';
-
-// import clsx from 'clsx';
-// import { nunito } from '@/app/ui/fonts';
-// import React from 'react';
-// import { Text, Tooltip } from '@geist-ui/core';
-
-
-// function Interior({
-//   title,
-//   value,
-//   padding,
-// }: {
-//   title: string;
-//   value: string;
-//   padding: string;
-// }) {
-//   return (
-//     <div className={'flex flex-col bg-zinc-50 h-20 rounded-xl ' + padding}>
-//       {/* CONTENT ROW */}
-//       <Text className={`${nunito.className} text-md ml-2`}> {title} </Text>
-//       <div className="flex flex-row px-8 -mx-2">
-      
-//         {/* LEFT COLUMN */}
-//         <div className='flex flex-col ml-4 mr-16 basis-1/2 items-center'>
-//           {/* VALUE DIV */}
-//           <div className="-mb-1">
-//             <p className={clsx(
-//               'font-semibold text-3xl',
-//               {
-                
-//                 'text-slate-600': value.toString().toLowerCase() === 'na'
-//               }
-//               )}>
-//                 {value.toString().toUpperCase()}
-//               </p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export function CardTestsAndDisciplineSummary({
-//   title,
-//   valueTop,
-//   valueBottom
-// }: {
-//   title: string;
-//   valueTop: string;
-//   valueBottom: string;
-// }) {
-
-//   return (
-//     <div>
-//       {/* MAIN DIV */}
-//       <div className="rounded-xl p-4 bg-zinc-100 shadow-md">
-//         {/* MAIN TITLE */}
-//         <h3 className="text-lg font-medium text-slate-800 mb-2">{title}</h3>
-
-//         {/* MAIN COLUMN */}
-//         <div className='flex flex-col'>
-//           {/* CARD 1 --- ODR */}
-//           <Tooltip text={"ODR Tooltip"} placement='bottom' enterDelay={450} className='basis-1/2 min-w-fit'>
-//             <Interior title='' value={valueTop} padding='mb-2'/>
-//           </Tooltip>
-//           {/* CARD 2 --- SUSPENSIONS */}
-//           <Tooltip text={"Suspensions Tooltip"} placement='bottom' enterDelay={450} className='basis-1/2 min-w-fit'>
-//             <Interior title='Suspensions' value={valueBottom} padding=''/>
-//           </Tooltip>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

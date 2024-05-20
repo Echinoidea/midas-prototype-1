@@ -7,7 +7,7 @@ import {
   
 } from '@heroicons/react/24/outline';
 import MaterialSymbolsLightPersonAlertOutline from '../../../icons/MaterialSymbolsLightPersonAlertOutline';
-import { Text } from '@geist-ui/core';
+import { Text, Tooltip } from '@geist-ui/core';
 
 import clsx from 'clsx';
 import React from 'react';
@@ -54,10 +54,10 @@ function RiskRow({
       {/* SAEBRS ROW */}
       <div className='flex flex-row bg-zinc-50 h-20 mb-2 px-4 rounded-xl shadow-sm'>
         <div className='flex flex-col w-full'>
-          <Text p className='-ml-2'>{title}</Text>
+          <p className='-ml-2'>{title}</p>
 
           <div className='flex flex-col justify-center items-center'>
-            <Text p className='text-3xl'>{riskValue.toUpperCase()}</Text>
+            <p className='text-3xl'>{riskValue.toUpperCase()}</p>
           </div>
         </div>
       </div>
@@ -90,38 +90,39 @@ export function SaebrsSummary({
       // MAIN ROW
       <div className='flex flex-row  bg-zinc-100 pt-6 pb-4 px-8 rounded-xl shadow-md'>
         {/* TOTAL RISK COLUMN */}
-        <div className='flex flex-col basis-1/4'>
+        <Tooltip text="Total Saebrs and MySaebrs score tooltip" placement='bottom' className='flex flex-col basis-1/4'>
           <RiskTitle title='Total' type='total'/>
           <RiskRow title='Saebrs' riskValue={saebrsTotal}/>
           <RiskRow title='MySaebrs' riskValue={mySaebrsTotal}/>
-        </div>
+        </Tooltip>
+        
         
         <VerticalDivider/>   
 
         {/* EMOTIONAL RISK COLUMN */}
-        <div className='flex flex-col basis-1/4'>
+        <Tooltip text="Emotional Saebrs and MySaebrs score tooltip" placement='bottom' className='flex flex-col basis-1/4'>
           <RiskTitle title='Emotional' type='emotional'/>
           <RiskRow title='Saebrs' riskValue={saebrsEmotional}/>
           <RiskRow title='MySaebrs' riskValue={mySaebrsEmotional}/>
-        </div>
+        </Tooltip>
 
         <VerticalDivider/>   
 
         {/* SOCIAL RISK COLUMN */}
-        <div className='flex flex-col basis-1/4'>
+        <Tooltip text="Social Saebrs and MySaebrs score tooltip" placement='bottom' className='flex flex-col basis-1/4'>
           <RiskTitle title='Social' type='social'/>
           <RiskRow title='Saebrs' riskValue={saebrsSocial}/>
           <RiskRow title='MySaebrs' riskValue={mySaebrsSocial}/>
-        </div>
+        </Tooltip>
 
         <VerticalDivider/>   
 
         {/* ACADEMIC RISK COLUMN */}
-        <div className='flex flex-col basis-1/4'>
+        <Tooltip text="Academic Saebrs and MySaebrs score tooltip" placement='bottom' className='flex flex-col basis-1/4'>
           <RiskTitle title='Academic' type='academic'/>
           <RiskRow title='Saebrs' riskValue={saebrsAcademic}/>
           <RiskRow title='MySaebrs' riskValue={mySaebrsAcademic}/>
-        </div>
+        </Tooltip>
       </div>
   );
 }

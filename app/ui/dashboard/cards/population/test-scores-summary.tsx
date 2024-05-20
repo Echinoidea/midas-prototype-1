@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { nunito } from '@/app/ui/fonts';
 import React from 'react';
-import { Text, Tooltip } from '@geist-ui/core';
+import { Card, CardHeader, Divider, Tooltip } from '@nextui-org/react';
+import { Nunito } from "next/font/google";
+const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function Interior({
   title,
@@ -15,9 +16,9 @@ function Interior({
   padding: string;
 }) {
   return (
-    <div className={'flex flex-col bg-zinc-50 h-20 rounded-xl ' + padding}>
+    <div className={'flex flex-col h-20 ' + padding}>
       {/* CONTENT ROW */}
-      <Text className={`${nunito.className} text-md ml-2`}> {title} </Text>
+      <p className={`${nunito.className} text-md ml-2`}> {title} </p>
       <div className="flex flex-row px-8 -mx-2">
       
         {/* LEFT COLUMN */}
@@ -25,7 +26,7 @@ function Interior({
           {/* VALUE DIV */}
           <div className="-mb-1">
             <p className={clsx(
-              'font-semibold text-3xl',
+              'text-3xl',
               {
                 
                 'text-slate-600': values[0].toString().toLowerCase() === 'na'
@@ -47,7 +48,7 @@ function Interior({
           {/* VALUE DIV */}
           <div className="">
             <p className={clsx(
-              'font-semibold text-3xl',
+              'text-3xl',
               {
                 
                 'text-slate-600': values[1].toString().toLowerCase() === 'na'
@@ -82,24 +83,31 @@ export function CardTestScoreSummary({
 }) {
 
   return (
-    <div>
-      {/* MAIN DIV */}
-      <div className="rounded-xl p-4 bg-zinc-100 shadow-md">
+      <Card className={`${nunito.className} items-center rounded-xl pb-2 bg-neutral-100`}>
         {/* MAIN TITLE */}
-        <h3 className="text-lg font-medium text-slate-800 mb-2">{title}</h3>
+        <CardHeader>
+          <h3 className="text-lg font-medium text-slate-800">{title}</h3>
+        </CardHeader>
+        
 
         {/* MAIN COLUMN */}
         <div className='flex flex-col'>
           {/* CARD 1 --- ODR */}
-          <Tooltip text={"Math Test Tooltip"} placement='bottom' enterDelay={450} className='basis-1/2 min-w-fit'>
-            <Interior title='Math Test Risks' values={valuesTop} subtitles={subtitlesTop} padding='mb-2'/>
+          <Tooltip content={"Math Test Tooltip"} placement='bottom'>
+            <div>
+              <Interior title='Math Test Risks' values={valuesTop} subtitles={subtitlesTop} padding=''/>
+            </div>
           </Tooltip>
+
+          <Divider className='mt-0 mb-1' />
+
           {/* CARD 2 --- SUSPENSIONS */}
-          <Tooltip text={"Math Test Tooltip"} placement='bottom' enterDelay={450} className='basis-1/2 min-w-fit'>
-            <Interior title='Reading Test Risks' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
+          <Tooltip content={"Reading Test Tooltip"} placement='bottom'>
+            <div>
+              <Interior title='Reading Test Risks' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
+            </div>
           </Tooltip>
         </div>
-      </div>
-    </div>
+      </Card>
   );
 }
