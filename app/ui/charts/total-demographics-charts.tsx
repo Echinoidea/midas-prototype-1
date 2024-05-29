@@ -1,6 +1,4 @@
 import { DonutChart, Card, Legend, BarChart } from '@tremor/react';
-import exp from 'constants';
-
 const genderDataPlaceholder = [
   {
     Gender: 'Male',
@@ -62,7 +60,7 @@ const totalPlaceholder = [
     'Low Risk': 100,
   },
   {
-    MySaebrs: 'MySaebrs',
+    Saebrs: 'MySaebrs',
     'High Risk': 20,
     'Some Risk': 150,
     'Low Risk': 130,
@@ -77,14 +75,14 @@ const emotionalPlaceholder = [
     'Low Risk': 100,
   },
   {
-    MySaebrs: 'MySaebrs',
+    Saebrs: 'MySaebrs',
     'High Risk': 20,
     'Some Risk': 150,
     'Low Risk': 130,
   },
 ];
 
-const sociallPlaceholder = [
+const socialPlaceholder = [
   {
     Saebrs: 'Saebrs',
     'High Risk': 58,
@@ -92,7 +90,7 @@ const sociallPlaceholder = [
     'Low Risk': 100,
   },
   {
-    MySaebrs: 'MySaebrs',
+    Saebrs: 'MySaebrs',
     'High Risk': 20,
     'Some Risk': 150,
     'Low Risk': 130,
@@ -107,7 +105,7 @@ const academicPlaceholder = [
     'Low Risk': 100,
   },
   {
-    MySaebrs: 'MySaebrs',
+    Saebrs: 'MySaebrs',
     'High Risk': 20,
     'Some Risk': 150,
     'Low Risk': 130,
@@ -170,7 +168,7 @@ export function BarChartTotal() {
     <BarChart
       className="transition md:h-[30rem] md:w-[60rem]"
       data={totalPlaceholder}
-      index="Total"
+      index="Saebrs"
       categories={['High Risk', 'Some Risk', 'Low Risk']}
       colors={colors}
       layout="horizontal"
@@ -186,7 +184,7 @@ export function EmotionalChart() {
     <BarChart
       className="transition md:h-[30rem] md:w-[60rem]"
       data={emotionalPlaceholder}
-      index="Emotional"
+      index="Saebrs"
       categories={['High Risk', 'Some Risk', 'Low Risk']}
       colors={colors}
       layout="horizontal"
@@ -201,8 +199,8 @@ export function SocialChart() {
   return (
     <BarChart
       className="transition md:h-[30rem] md:w-[60rem]"
-      data={emotionalPlaceholder}
-      index="Social"
+      data={socialPlaceholder}
+      index="Saebrs"
       categories={['High Risk', 'Some Risk', 'Low Risk']}
       colors={colors}
       layout="horizontal"
@@ -217,8 +215,8 @@ export function AcademicChart() {
   return (
     <BarChart
       className="transition md:h-[30rem] md:w-[60rem]"
-      data={emotionalPlaceholder}
-      index="Academic"
+      data={academicPlaceholder}
+      index="Saebrs"
       categories={['High Risk', 'Some Risk', 'Low Risk']}
       colors={colors}
       layout="horizontal"
