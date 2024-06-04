@@ -1,6 +1,6 @@
 
 import SideNav from '@/app/ui/dashboard/sidenav';
-import { SearchContextProvider } from '../context/test';
+import { SearchContextProvider } from '../context/nav-search-context-provider';
  
 export default function Layout({ children }: { children: React.ReactNode }) {
   
