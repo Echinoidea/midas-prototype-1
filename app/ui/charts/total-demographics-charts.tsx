@@ -1,25 +1,25 @@
 import { DonutChart, Card, Legend, BarChart } from '@tremor/react'
-import exp from 'constants'
+// import BarChart from "@tremor/react";
+
  
 
 const genderDataPlaceholder = [
   {
     Gender: 'Male',
-    'Total': 530,
-    'High Risk': 70,
+    'High Risk': 40,
     'Some Risk': 200,
     'Low Risk': 180
   },
   {
     Gender: 'Female',
-    'Total': 550,
     'High Risk': 30,
     'Some Risk': 56,
     'Low Risk': 300
-  }
+  },
 ]
 
 const ethnicityDataPlaceholder = [
+  
   {
     Ethnicity: 'White',
     'High Risk': 58,
@@ -37,7 +37,7 @@ const ethnicityDataPlaceholder = [
     'High Risk': 33,
     'Some Risk': 156,
     'Low Risk': 200
-  }
+  },
 ]
 
 const englishLearnerDataPlaceholder = [
@@ -52,15 +52,14 @@ const englishLearnerDataPlaceholder = [
     'High Risk': 20,
     'Some Risk': 150,
     'Low Risk': 130
-  }
+  },
 ]
 
-const colors = ['rose-500', 'yellow-400', 'green-500']
+const colors = ['red-400', 'yellow-300', 'green-400']
 
 export function DonutChartGender() {
   return (
-
-      <BarChart
+    <BarChart
         className='min-h-full h-max'
         data={genderDataPlaceholder}
         index='Gender'
@@ -69,9 +68,10 @@ export function DonutChartGender() {
         layout='horizontal'
         yAxisWidth={50}
         stack={true}
-        
+        tickGap={25}
+        barCategoryGap={40}
       />
-
+    
   )
 }
 
@@ -87,7 +87,7 @@ export function BarChartEthnicity() {
         layout='horizontal'
         yAxisWidth={50}
         stack={true}
-        
+        barCategoryGap={16}
       />
   )
 }
@@ -104,6 +104,7 @@ export function BarChartEnglishLearner() {
       layout='horizontal'
       yAxisWidth={50}
       stack={true}
+      barCategoryGap={40}
     />
   )
 }

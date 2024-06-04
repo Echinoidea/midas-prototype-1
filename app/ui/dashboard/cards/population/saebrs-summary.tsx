@@ -128,7 +128,7 @@ export function SaebrsSummary({
 // min-w-fit max-w-sm on tooltip className if break
   return (
       // MAIN ROW
-      <div className={`${nunito.className} flex flex-row gap-2 min-w-full w-full`}>
+      <div className={`${nunito.className} flex flex-col gap-4 lg:flex-row`}>
         <Card className='flex bg-neutral-100 pt-6 pb-3 px-2 basis-1/4 w-full'>
           {/* TOTAL RISK COLUMN */}
           <Tooltip content="Total Saebrs and MySaebrs score tooltip" placement='bottom'>

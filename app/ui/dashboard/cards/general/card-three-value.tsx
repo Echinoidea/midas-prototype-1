@@ -109,12 +109,12 @@ export function CardThreeValue({
   tooltip: React.ReactNode;
 }) {
   return (
-    <Tooltip content={tooltip} placement='bottom'>
+    <Tooltip content={tooltip} placement='bottom' className="h-full">
       <Card className=" bg-neutral-100" shadow='md'>
         <CardHeader className={nunito.className}>
           <h3 className="text-lg font-medium text-slate-800">{title}</h3>
         </CardHeader>
-        <CardBody className=''>
+        <CardBody className='-mt-3'>
           <ThreeValueInterior values={values} subtitles={subtitles}/>
         </CardBody>
       </Card>

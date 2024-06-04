@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Card, CardHeader, Divider, Tooltip } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Divider, Spacer, Tooltip } from '@nextui-org/react';
 import { Nunito } from "next/font/google";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
@@ -42,6 +42,7 @@ function Interior({
           </div>
         </div>
         
+        {/* <Spacer x={32}/> */}
 
         {/* RIGHT COLUMN */}
         <div className='flex flex-col ml-16 mr-4 basis-1/2 items-center'>
@@ -83,31 +84,31 @@ export function CardTestScoreSummary({
 }) {
 
   return (
-      <Card className={`${nunito.className} items-center rounded-xl pb-2 bg-neutral-100`}>
+
+      <Card className={`${nunito.className} bg-neutral-100 h-full`}>
         {/* MAIN TITLE */}
-        <CardHeader>
+        <CardHeader className=''>
           <h3 className="text-lg font-medium text-slate-800">{title}</h3>
         </CardHeader>
         
-
-        {/* MAIN COLUMN */}
-        <div className='flex flex-col'>
+        {/* MAIN CONTENT */}
+        <CardBody className='flex flex-col -mt-4 px-4'>
           {/* CARD 1 --- ODR */}
-          <Tooltip content={"Math Test Tooltip"} placement='bottom'>
-            <div>
-              <Interior title='Math Test Risks' values={valuesTop} subtitles={subtitlesTop} padding=''/>
+          <Tooltip content={"ODR Tooltip"} placement='bottom'>
+            <div className=''>
+              <Interior title='Math' values={valuesTop} subtitles={subtitlesTop} padding=''/>
             </div>
           </Tooltip>
 
-          <Divider className='mt-0 mb-1' />
+          <Divider className='mt-0 mb-1'/>
 
           {/* CARD 2 --- SUSPENSIONS */}
-          <Tooltip content={"Reading Test Tooltip"} placement='bottom'>
-            <div>
-              <Interior title='Reading Test Risks' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
+          <Tooltip content={"Reading test risk Tooltip"} placement='bottom'>
+            <div className=''>
+              <Interior title='Reading' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
             </div>
           </Tooltip>
-        </div>
+        </CardBody>
       </Card>
   );
 }

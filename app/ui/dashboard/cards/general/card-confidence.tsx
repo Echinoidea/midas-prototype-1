@@ -24,20 +24,29 @@ export function CardConfidenceVisualizer({
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
-    <div>
-      <Tooltip content={TooltipContent()} placement='bottom'>
+      <Tooltip content={TooltipContent()} placement='bottom' className='h-full'>
         <div onClick={onOpen}>
-          <Card className={`${nunito.className} rounded-xl bg-neutral-100`} shadow='md'>
+          <Card className={`${nunito.className} rounded-xl bg-neutral-100 h-full`} shadow='md'>
             <CardHeader className=''>
               <h3 className="text-lg font-medium text-slate-800"> MIDAS Risk Confidence </h3>
             </CardHeader>
             
-            <div className='flex flex-col items-center pb-4'>
+            <CardBody className='px-4 -mt-4 w-full -mb-4'>
+              {/* <div className='flex flex-col items-center  pb-4'>
+                <p className='text-md'> Missing Variables </p>
+                <p className='text-4xl'> {1} </p>
+              </div>
 
-              <p className='text-md'> Missing variables </p>
-              <p className='text-4xl'> {1} </p>
-              <ConfidenceIntervalVisualizer confidence={confidence} thresholds={confidenceThresholds}/>
-            </div>
+              <Divider className='mt-0 mb-1'/> */}
+
+              <div className='flex flex-col items-center pb-4'>
+                {/* <p className='text-md'> Prediction Confidence </p> */}
+                <p className='text-4xl'> {confidence + "%"} </p>
+                <ConfidenceIntervalVisualizer confidence={confidence} thresholds={confidenceThresholds}/>
+              </div>
+            </CardBody>
+
+            
           </Card>
           
           <Modal className={nunito.className} isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' scrollBehavior='inside'>
@@ -114,6 +123,5 @@ export function CardConfidenceVisualizer({
           </Modal>
         </div>
       </Tooltip>
-    </div>
   );
 }

@@ -10,6 +10,11 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { Input, Textarea } from '@nextui-org/react';
+import path from 'path';
+import { useContext, useEffect, useState } from 'react';
+import { SearchContext } from '@/app/context/nav-search-context';
+import { SearchContextProvider } from '@/app/context/test';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -19,7 +24,7 @@ const links = [
     icon: HomeIcon },
 
   { name: 'Grade', 
-    href: '/dashboard/grade', 
+    href: '/dashboard/grade' ,
     icon: AcademicCapIcon 
   },
   
@@ -32,30 +37,110 @@ const links = [
     href: '/dashboard/student',
     icon: UserIcon,
   },
-
-  
 ];
 
-export default function NavLinks() {
+const MySearchBox: React.FC<{ href: string }> = ({ href }) => {
   const pathname = usePathname();
+  
+  const placeholders = {
+    '/dashboard/school': "Enter school ID",
+    '/dashboard/grade': "Enter grade level",
+    '/dashboard/classroom': "Enter classroom ID",
+    '/dashboard/student': "Enter student ID"
+  }
+
+  const formNames = {
+    '/dashboard/school': "schoolId",
+    '/dashboard/grade': "gradeId",
+    '/dashboard/classroom': "classroomId",
+    '/dashboard/student': "studentId"
+  }
+
+  const {
+    school,
+    grade,
+    classroom,
+    student
+  } = useContext(SearchContext);
+  
+  // const sidenavContext = useContext(SidenavSearchContext);
+    
+  const SearchAction = async (formData: FormData) => {
+    const id = formData.get('schoolId') || ""
+    school[1](id.toString())
+    console.log("Searched")
+  }
+  
+  if (pathname === href) {
+    return (
+      <form onSubmit={(e) => { 
+        e.preventDefault(); 
+        const formData = new FormData(e.target as HTMLFormElement);
+        SearchAction(formData); 
+      }}>
+        <Input
+          type='text' 
+          variant='bordered'
+          name={formNames[pathname as keyof typeof formNames]}
+          placeholder={placeholders[pathname as keyof typeof placeholders]}
+          className="max-md:hidden h-8 mb-4"
+        />
+      </form>
+    )
+  }
+
+  return null;
+}
+
+
+
+export default function NavLinks({
+  collapsed
+}: {
+  collapsed: boolean;
+}) {
+  
+
+  
+
+  // selectedGrade,
+  // setSelectedGrade,
+  // selectedClassroom,
+  // setSelectedClassroom,
+  // selectedStudent,
+  // setSelectedStudent
+
+  const [selectedSchool, setSelectedSchool] = useState<string>("");
+  const value = { selectedSchool, setSelectedSchool };
+
+  const pathname = usePathname();
+
+  // useEffect(() => {
+  //   console.log(selectedSchool);
+  // }, [selectedSchool]);
+
   return (
     <>
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100 hover:text-green-600 md:flex-none md:justify-start md:p-2 md:px-3",
-              {
-                'bg-green-100 text-green-600': pathname === link.href,
-              }
-            )}
-          >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
+          <div>
+            <Link
+              key={link.name}
+              href={link.href}
+              className={clsx(
+                "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100 hover:text-green-600 md:flex-none md:justify-start md:p-2 md:px-3",
+                {
+                  'bg-green-100 text-green-600': pathname === link.href,
+                }
+              )}
+            >
+              {/* <LinkIcon className={clsx({'w-6' : !collapsed, 'w-9' : collapsed})}/> */}
+              <LinkIcon className='w-6'></LinkIcon>
+              {!collapsed ? <p className="hidden md:block">{link.name}</p> : <></>}
+            </Link>
+            {!collapsed ? <MySearchBox href={link.href} /> : null}
+          </div>
         );
       })}
     </>

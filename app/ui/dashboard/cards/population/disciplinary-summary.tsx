@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Card, CardHeader, Tooltip, Divider } from '@nextui-org/react';
+import { Card, CardHeader, Tooltip, Divider, CardBody } from '@nextui-org/react';
 import { Nunito } from "next/font/google";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
@@ -84,17 +84,17 @@ export function CardDisciplinarySummary({
 
   return (
 
-      <Card className={`${nunito.className} items-center rounded-xl pb-2 bg-neutral-100`}>
+      <Card className={`${nunito.className} bg-neutral-100 h-full`}>
         {/* MAIN TITLE */}
         <CardHeader className=''>
           <h3 className="text-lg font-medium text-slate-800">{title}</h3>
         </CardHeader>
         
         {/* MAIN CONTENT */}
-        <div className='flex flex-col'>
+        <CardBody className='flex flex-col -mt-4 px-4'>
           {/* CARD 1 --- ODR */}
           <Tooltip content={"ODR Tooltip"} placement='bottom'>
-            <div>
+            <div className=''>
               <Interior title='ODR' values={valuesTop} subtitles={subtitlesTop} padding=''/>
             </div>
           </Tooltip>
@@ -103,11 +103,11 @@ export function CardDisciplinarySummary({
 
           {/* CARD 2 --- SUSPENSIONS */}
           <Tooltip content={"Suspensions Tooltip"} placement='bottom'>
-            <div>
+            <div className=''>
               <Interior title='Suspensions' values={valuesBottom} subtitles={subtitlesBottom} padding=''/>
             </div>
           </Tooltip>
-        </div>
+        </CardBody>
       </Card>
   );
 }

@@ -7,8 +7,20 @@ import { CardTestScoreSummary } from '@/app/ui/dashboard/cards/population/test-s
 import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
 import { useState } from 'react';
 import { CardThreeValue } from '@/app/ui/dashboard/cards/general/card-three-value';
+import { Tooltip } from '@nextui-org/react';
+import { DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
+import GradeSearch from '@/app/ui/dashboard/cards/search/grade-search';
+import { useSearchParams } from 'next/navigation';
 
 
+
+function MidasRiskTooltipContent() {
+  return (
+    <div>
+      Percentages of students at the three different MIDAS risk levels.
+    </div>
+  )
+}
 
 export default async function Page() {
   // const mySaebrsEmoHigh = (await fetchMySaebrsData()).emo;
@@ -46,65 +58,63 @@ export default async function Page() {
     'mySaebrsAcademic':['70%', '18%', '12%'],
   })
 
+  const [ selectedGrade, setSelectedGrade ] = useState(useSearchParams().get("grade") || "8");
+
   return (
     <main>
-
-      <div className='flex flex-col'>
-        <div className="mb-4 rounded-md -mr-2">
-          {/* <SchoolSearch schools={schools}></SchoolSearch> */}
-        </div>
-
-        <div className="flex flex-row mb-4 rounded-md">
-          <div className='flex flex-col mr-4'>
+      <div className='flex md:flex-row flex-col gap-4'>
+        {/* LEFT COL */}
+        <div className="flex flex-col justify-normal gap-3 basis-1/4">
             
+          <div className='flex flex-col justify-start'>
+              <GradeSearch selectedGrade={selectedGrade} setSelectedGrade={setSelectedGrade} />
+          </div>
 
-            <div className='pb-4 w-96'>
+          <div className='flex flex-col justify-start'>
               <CardThreeValue 
-                title="Percentage of Students at Risk" 
+                title="MIDAS Risk Scores" 
                 values={[
                   midasRisk['low'],
                   midasRisk['some'],
                   midasRisk['high']
                 ]} 
-                subtitles={['Low', 'Some', 'High']}
-                tooltip="Percentages of students at the three different MIDAS risk levels."/>
-            </div>
-
-             <div className='pb-4 w-96'>
-              <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]}/>
-            </div>
-
-            <div className='pb-4 w-96'>
-              <CardDisciplinarySummary
-                title={'Disciplinary Action Summary'} 
-                valuesTop={[
-                  disciplineRisk['odrZero'],
-                  disciplineRisk['odrSome']
-                ]} 
-                subtitlesTop={['Zero', 'One Plus']} 
-                valuesBottom={[
-                  disciplineRisk['suspZero'],
-                  disciplineRisk['suspSome']
-                ]}
-                subtitlesBottom={['Zero', 'One Plus']}            
-              />
-            </div>
-
-            <div className='pb-4 w-96'>
-              <CardTestScoreSummary
-                title={'Math Score Risk Summary'} 
-                valuesTop={['60%', '40%']} 
-                subtitlesTop={['Value1', 'Value2']} 
-                valuesBottom={['55%', '45%']}
-                subtitlesBottom={['Value1', 'Value2']}            
-              />
-            </div>
-
+              subtitles={['Low', 'Some', 'High']}
+              tooltip={MidasRiskTooltipContent()}/>
           </div>
 
-          <div className='flex flex-col'>
-            
-            <div className='pb-4'>
+          <div className='flex flex-col justify-start'>
+            <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]}/>
+          </div>
+
+          <div className='flex flex-col justify-start basis-1/6'>
+            <CardDisciplinarySummary
+              title={'Disciplinary Action Summary'} 
+              valuesTop={[
+                disciplineRisk['odrZero'],
+                disciplineRisk['odrSome']
+              ]} 
+              subtitlesTop={['Zero', 'One Plus']} 
+              valuesBottom={[
+                disciplineRisk['suspZero'],
+                disciplineRisk['suspSome']
+              ]}
+              subtitlesBottom={['Zero', 'One Plus']}            
+            />
+          </div>
+
+          <div className='flex flex-col basis-1/6'>
+            <CardTestScoreSummary
+              title={'Test Score Risk Summary'} 
+              valuesTop={['60%', '40%']} 
+              subtitlesTop={['Low', 'Some']} 
+              valuesBottom={['55%', '45%']}
+              subtitlesBottom={['Low', 'Some']}            
+            />
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-6 basis-3/4'>
+            <div className='flex flex-col basis-1/6'>
               <SaebrsSummary 
                 saebrsTotal={saebrsRisk['mySaebrsTotal']}
                 mySaebrsTotal={saebrsRisk['mySaebrsTotal']}
@@ -116,13 +126,18 @@ export default async function Page() {
                 mySaebrsAcademic={saebrsRisk['mySaebrsTotal']}
               />
             </div>
-              <PopToRiskCharts/>
-          </div>
 
+            <div className='flex flex-col basis-5/6 pb-4 max-lg:hidden'>
+              <PopToRiskCharts/>
+            </div>
         </div>  
+
+        <div className='flex flex-col lg:hidden h-96'>
+          <PopToRiskCharts/>
+        </div>
       </div>
 
-
+      
     </main>
   );
 }

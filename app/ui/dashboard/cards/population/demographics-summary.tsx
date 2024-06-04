@@ -17,8 +17,8 @@ export function PopToRiskCharts() {
   const [ ellRiskSample, setEllRiskSample ] = useState('high')
 
   return (
-    // Main div
-    <div className={`${nunito.className} flex flex-row min-h-max h-max basis-full`}>
+    // Main div min-h-max h-max basis-full
+    <div className={`${nunito.className} flex flex-row basis-full`}>
       
       
       <Card className='bg-neutral-100 mr-2 pb-7 -mb-4  basis-1/3 rounded-xl' shadow='md'>
