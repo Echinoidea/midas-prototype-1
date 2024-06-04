@@ -5,12 +5,13 @@ import { PopToRiskCharts } from '@/app/ui/dashboard/cards/population/demographic
 import { CardDisciplinarySummary } from '@/app/ui/dashboard/cards/population/disciplinary-summary';
 import { CardTestScoreSummary } from '@/app/ui/dashboard/cards/population/test-scores-summary';
 import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardThreeValue } from '@/app/ui/dashboard/cards/general/card-three-value';
 import { Tooltip } from '@nextui-org/react';
 import { DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
 import GradeSearch from '@/app/ui/dashboard/cards/search/grade-search';
 import { useSearchParams } from 'next/navigation';
+import { useSearchContext } from '@/app/context/nav-search-context';
 
 
 
@@ -58,7 +59,13 @@ export default async function Page() {
     'mySaebrsAcademic':['70%', '18%', '12%'],
   })
 
-  const [ selectedGrade, setSelectedGrade ] = useState(useSearchParams().get("grade") || "8");
+  const stateGrade = useSearchContext('grade')
+  const selectedGrade = stateGrade.get
+  const setSelectedGrade = stateGrade.set
+
+  useEffect(() => {
+    console.log('Selected grade:', selectedGrade);
+  }, [selectedGrade]);
 
   return (
     <main>

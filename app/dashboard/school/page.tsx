@@ -5,12 +5,10 @@ import { PopToRiskCharts } from '@/app/ui/dashboard/cards/population/demographic
 import { CardDisciplinarySummary } from '@/app/ui/dashboard/cards/population/disciplinary-summary';
 import { CardTestScoreSummary } from '@/app/ui/dashboard/cards/population/test-scores-summary';
 import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardThreeValue } from '@/app/ui/dashboard/cards/general/card-three-value';
-import { Tooltip } from '@nextui-org/react';
-import { DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
 import SchoolSearch from '@/app/ui/dashboard/cards/search/school-search';
-import { SearchContext, useSearchContext } from '@/app/context/nav-search-context';
+import { useSearchContext } from '@/app/context/nav-search-context';
 
 
 
@@ -66,8 +64,6 @@ export default async function Page() {
 
   useEffect(() => {
     console.log('Selected school:', selectedSchool);
-    // Fetch or use the data related to the selectedSchool
-    // Example: fetchStudents(selectedSchool);
   }, [selectedSchool]);
 
   return (

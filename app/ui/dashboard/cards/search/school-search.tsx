@@ -1,5 +1,3 @@
-
-import clsx from "clsx";
 import { 
   Card, 
   CardBody, 
@@ -13,31 +11,10 @@ import {
   Button
 } from "@nextui-org/react";
 import { Nunito } from "next/font/google";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import SimpleLineIconsMagnifier from "@/app/ui/icons/SimpleLineIconsMagnifier";
 import Link from "next/link";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
-
-
-const links = [
-  { name: 'School', 
-    href: '/dashboard/school',
-  },
-
-  { name: 'Grade', 
-    href: '/dashboard/grade', 
-  },
-  
-  { name: 'Classroom', 
-    href: '/dashboard/classroom', 
-  },
-
-  { name: 'Student',
-    href: '/dashboard/student',
-  },
-];
-
-
 
 export default function SchoolSearch({
   selectedSchool,
@@ -46,8 +23,6 @@ export default function SchoolSearch({
   selectedSchool: string;
   setSelectedSchool : React.Dispatch<React.SetStateAction<string>>;
 }) {
-
-  //const [ selectedSchool, setSelectedSchool ] = useState("");
 
   const [ gradeList, setGradeList ] = useState(["8", "7", "6"]);
 
@@ -118,20 +93,3 @@ export default function SchoolSearch({
       </Card>
   );
 }
-
-// <DropdownItem key="8">
-//                   <Link
-//                     key={}
-//                     href={}
-//                     className={clsx(
-//                       "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100 hover:text-green-600 md:flex-none md:justify-start md:p-2 md:px-3",
-//                       {
-//                         'bg-green-100 text-green-600': pathname === link.href,
-//                       }
-//                     )}
-//                   >
-                    
-//                   </Link>
-//                 </DropdownItem>
-//                 <DropdownItem key="7">7</DropdownItem>
-//                 <DropdownItem key="6">6</DropdownItem>

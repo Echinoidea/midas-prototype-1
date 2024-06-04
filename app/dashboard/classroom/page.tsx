@@ -5,12 +5,10 @@ import { PopToRiskCharts } from '@/app/ui/dashboard/cards/population/demographic
 import { CardDisciplinarySummary } from '@/app/ui/dashboard/cards/population/disciplinary-summary';
 import { CardTestScoreSummary } from '@/app/ui/dashboard/cards/population/test-scores-summary';
 import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardThreeValue } from '@/app/ui/dashboard/cards/general/card-three-value';
-import { Tooltip } from '@nextui-org/react';
-import { DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
 import ClassSearch from '@/app/ui/dashboard/cards/search/class-search';
-import { useSearchParams } from 'next/navigation';
+import { useSearchContext } from '@/app/context/nav-search-context';
 
 
 
@@ -59,21 +57,23 @@ export default async function Page() {
   })
 
   // TODO fetch function to get first authorized classroom id
-  const [ defaultClass, setDefaultClass ] = useState("C01"); // TEMPORARY VALUE
 
-  const [ selectedClass, setSelectedClass ] = useState(useSearchParams().get("classroom") || defaultClass);
+  const stateClassroom = useSearchContext('classroom')
+  const selectedClassroom = stateClassroom.get
+  const setSelectedClassroom = stateClassroom.set
 
+  useEffect(() => {
+    console.log('Selected grade:', selectedClassroom);
+  }, [selectedClassroom]);
+  
   return (
-
-    
-
     <main>
       <div className='flex md:flex-row flex-col gap-4'>
         {/* LEFT COL */}
         <div className="flex flex-col justify-normal gap-3 basis-1/4">
             
           <div className='flex flex-col justify-start'>
-            <ClassSearch selectedClass={selectedClass} setSelectedClass={setSelectedClass}/>
+            <ClassSearch selectedClass={selectedClassroom} setSelectedClass={setSelectedClassroom}/>
           </div>
 
           <div className='flex flex-col justify-start'>

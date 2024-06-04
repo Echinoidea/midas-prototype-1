@@ -14,7 +14,6 @@ import { Input, Textarea } from '@nextui-org/react';
 import path from 'path';
 import { useContext, useEffect, useState } from 'react';
 import { SearchContext } from '@/app/context/nav-search-context';
-import { SearchContextProvider } from '@/app/context/test';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -42,6 +41,7 @@ const links = [
 const MySearchBox: React.FC<{ href: string }> = ({ href }) => {
   const pathname = usePathname();
   
+  console.log("HREF: " + href)
   const placeholders = {
     '/dashboard/school': "Enter school ID",
     '/dashboard/grade': "Enter grade level",
@@ -66,9 +66,26 @@ const MySearchBox: React.FC<{ href: string }> = ({ href }) => {
   // const sidenavContext = useContext(SidenavSearchContext);
     
   const SearchAction = async (formData: FormData) => {
-    const id = formData.get('schoolId') || ""
-    school[1](id.toString())
-    console.log("Searched")
+    if (href === '/dashboard/school') {
+      const id = formData.get('schoolId') || ""
+      school[1](id.toString())
+      console.log("Searched school")
+    }
+    else if (href === '/dashboard/grade') {
+      const id = formData.get('gradeId') || ""
+      grade[1](id.toString())
+      console.log("Searched grade")
+    }
+    else if (href === '/dashboard/classroom') {
+      const id = formData.get('classroomId') || ""
+      classroom[1](id.toString())
+      console.log("Searched classroom")
+    }
+    else {
+      const id = formData.get('studentId') || ""
+      student[1](id.toString())
+      console.log("Searched student")
+    }
   }
   
   if (pathname === href) {
@@ -93,31 +110,16 @@ const MySearchBox: React.FC<{ href: string }> = ({ href }) => {
 }
 
 
-
 export default function NavLinks({
   collapsed
 }: {
   collapsed: boolean;
 }) {
-  
-
-  
-
-  // selectedGrade,
-  // setSelectedGrade,
-  // selectedClassroom,
-  // setSelectedClassroom,
-  // selectedStudent,
-  // setSelectedStudent
 
   const [selectedSchool, setSelectedSchool] = useState<string>("");
   const value = { selectedSchool, setSelectedSchool };
 
   const pathname = usePathname();
-
-  // useEffect(() => {
-  //   console.log(selectedSchool);
-  // }, [selectedSchool]);
 
   return (
     <>
