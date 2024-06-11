@@ -47,7 +47,7 @@ export function DonutChartGender({selectedSlice}: {selectedSlice: string}) {
       innerRadius={0.6}
       padAngle={0.7}
       cornerRadius={3}
-      activeOuterRadiusOffset={12} // This expands the active slice
+      activeOuterRadiusOffset={18} // This expands the active slice
       colors={({ id }) => {
         const index = genderDataPlaceholder.findIndex(d => d.id === id);
         return colors[index % colors.length];
@@ -77,7 +77,7 @@ export function DonutChartEthnicity({selectedSlice}: {selectedSlice: string}) {
     innerRadius={0.6}
     padAngle={0.7}
     cornerRadius={3}
-    activeOuterRadiusOffset={12} // This expands the active slice
+    activeOuterRadiusOffset={18} // This expands the active slice
     colors={({ id }) => {
       const index = ethnicityDataPlaceholder.findIndex(d => d.id === id);
       return colors[index % colors.length];
@@ -97,7 +97,7 @@ export function DonutChartEthnicity({selectedSlice}: {selectedSlice: string}) {
 }
 
 export function DonutChartEnglishLearner({selectedSlice}: {selectedSlice: string}) {
-  const colors = ['#f87171', '#a5f3fc', '#4ade80']
+  const colors = ['#4ade80', '#a3a3a3']
   
   return (
 
@@ -107,7 +107,7 @@ export function DonutChartEnglishLearner({selectedSlice}: {selectedSlice: string
       innerRadius={0.6}
       padAngle={0.7}
       cornerRadius={3}
-      activeOuterRadiusOffset={12} // This expands the active slice
+      activeOuterRadiusOffset={18} // This expands the active slice
       colors={({ id }) => {
         const index = englishLearnerDataPlaceholder.findIndex(d => d.id === id);
         return colors[index % colors.length];

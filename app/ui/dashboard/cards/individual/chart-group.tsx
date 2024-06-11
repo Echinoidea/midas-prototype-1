@@ -5,7 +5,6 @@ import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  Dropdown
 import { Button } from "@nextui-org/react";
 import { Nunito } from "next/font/google";
 import {  DonutChartEnglishLearner, DonutChartEthnicity, DonutChartGender } from "@/app/ui/charts/individual-demographics-charts";
-import DonutChart from "@/app/ui/charts/expanding-pie-test";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function Capitalize(str: string){
@@ -18,26 +17,32 @@ export function RiskCharts() {
   const [ ellRiskSample, setEllRiskSample ] = useState('high')
 
   return (
-    <div className={`${nunito.className} flex flex-row basis-full`}>
-      <Card className='bg-neutral-100 mr-2 pb-7 -mb-4  basis-1/3 rounded-xl' shadow='md'>
-        <p className={`pl-2 -mb-8 text-xl`}>Gender and Risk</p>
-        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
-          <DonutChartGender selectedSlice={'Male'}/>
+    <div className={`${nunito.className} flex flex-row gap-2 basis-full`}>
+      <Card className='flex flex-col bg-neutral-100 basis-1/3 rounded-xl pb-8' shadow='md'>
+        <p className='text-2xl pb-10'>Gender</p>
+        <div className='flex w-full -mb-16 justify-center'>
+          <p className='text-2xl'>Male</p>
         </div>
+        
+        <DonutChartGender selectedSlice={'Male'}/>
       </Card>
 
-      <Card className='bg-neutral-100 mr-2  pb-7 -mb-4 basis-1/3 rounded-xl' shadow='md'>
-        <p className={`pl-2 -mb-8 text-xl font-sans`}>English Learner Status and Risk</p>
-        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
-          <DonutChartEnglishLearner selectedSlice={"ELL"}/>
+      <Card className='flex flex-col bg-neutral-100 basis-1/3 rounded-xl pb-8 ' shadow='md'>
+        <p className='text-2xl pb-10'>English Learner Status</p>
+        <div className='flex w-full -mb-16 justify-center'>
+          <p className='text-2xl'>English Learner</p>
         </div>
+
+        <DonutChartEnglishLearner selectedSlice={"ELL"}/>
       </Card>
 
-      <Card className='bg-neutral-100 mr-2  pb-7 -mb-4 basis-1/3 rounded-xl' shadow='md'>
-        <p className={`pl-2 -mb-8 text-xl font-sans`}>Ethnicity and Risk</p>
-        <div className='flex flex-col pt-10 mb-0 mt-auto h-full'>
-          <DonutChartEthnicity selectedSlice={"White"} />
+      <Card className='flex flex-col bg-neutral-100 basis-1/3 rounded-xl pb-8' shadow='md'>
+        <p className='text-2xl pb-10 '>Ethnicity</p>
+        <div className='flex w-full -mb-16 justify-center'>
+          <p className='text-2xl'>White</p>
         </div>
+        
+        <DonutChartEthnicity selectedSlice={"White"} />
       </Card>
     </div>
   );
