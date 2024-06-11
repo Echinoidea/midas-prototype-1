@@ -35,8 +35,8 @@ export function CardStudentIdentification({
   return (
     <Card className={`${nunito.className} bg-neutral-100 w-full`} shadow='md'>
       <CardBody className={`${nunito.className} flex gap-1 justify-center`}>
-        <Row header="Student ID" content={id}/>
-        <Divider/>
+        {/* <Row header="Student ID" content={id}/>
+        <Divider/> */}
         <Row header="Classroom ID" content={classroom}/>
         <Divider/>
         <Row header="Grade Level" content={grade}/>

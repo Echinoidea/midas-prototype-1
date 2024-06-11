@@ -1,12 +1,5 @@
 import React, { createContext, useContext } from "react";
 
-
-// WORKING FOR ONE STATE
-// export interface ISearchContext {
-//   selectedSchool: string;
-//   setSelectedSchool: React.Dispatch<React.SetStateAction<string>>;
-// }
-
 export interface ISearchContext {
   school: [ string, React.Dispatch<React.SetStateAction<string>> ],
   grade: [ string, React.Dispatch<React.SetStateAction<string>> ],
@@ -36,7 +29,6 @@ export const useSearchContext = (query : 'school' | 'grade' | 'classroom' | 'stu
     'setClassroom': useContext(SearchContext).classroom[1],
     'getStudent':   useContext(SearchContext).student[0],
     'setStudent':   useContext(SearchContext).student[1],
-
   }
 
   if (query == 'school')         { return {get: states.getSchool,    set: states.setSchool } }

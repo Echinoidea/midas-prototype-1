@@ -28,7 +28,7 @@ function RiskTitle({
   const Icon = iconMap[type];
 
   return (
-    <div className='flex flex-row items-start justify-start -mt-2 mb-1'>
+    <div className='flex flex-row items-start justify-start -mb-4 -ml-1 mt-1'>
       {Icon ? <Icon className="h-6 w-6 text-gray-700" /> : null}
       <p className='pl-2'>{title}</p>
     </div>
@@ -49,7 +49,7 @@ function Row({
 }) {
   return (
     <div className=''>
-      <p className='items-start font-normal text-xl'>{header}</p>
+      <p className='items-start'>{header}</p>
       <div className="flex flex-col items-center text-xl">
         <p className='text-3xl'>{content}</p>
       </div>
@@ -70,7 +70,7 @@ function CardSaebrs({
   tooltip: string;
 }) {
   return(
-  <Card className='bg-neutral-100 basis-1/4 w-full pb-4'>
+  <Card className='bg-neutral-100 basis-1/4 w-full px-3 pb-4'>
     <CardHeader>
       <RiskTitle title={CapitalizeFirstLetter(header)} type={header}/>
     </CardHeader>
@@ -113,7 +113,7 @@ export function SaebrsSummary({
 // min-w-fit max-w-sm on tooltip className if break
   return (
       // MAIN ROW
-      <div className={`${nunito.className} flex flex-col gap-4 lg:flex-row`}>
+      <div className={`${nunito.className} flex flex-col gap-4 lg:flex-row  `}>
         
           
           <CardSaebrs header="total" saebrs={saebrsTotal} mySaebrs={mySaebrsTotal} tooltip="Total tooltip"/>

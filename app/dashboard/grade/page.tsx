@@ -8,7 +8,7 @@ import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-
 import { useEffect, useState } from 'react';
 import { CardThreeValue } from '@/app/ui/dashboard/cards/general/card-three-value';
 import { Tooltip } from '@nextui-org/react';
-import { DonutChartGender } from '@/app/ui/charts/total-demographics-charts';
+import { BarChartGender } from '@/app/ui/charts/total-demographics-charts';
 import GradeSearch from '@/app/ui/dashboard/cards/search/grade-search';
 import { useSearchParams } from 'next/navigation';
 import { useSearchContext } from '@/app/context/nav-search-context';

@@ -1,4 +1,7 @@
+'use client';
+
 import { DonutChart, Card, Legend, BarChart } from '@tremor/react'
+import { useState } from 'react';
 // import BarChart from "@tremor/react";
 
  
@@ -58,6 +61,8 @@ const englishLearnerDataPlaceholder = [
 const colors = ['red-400', 'yellow-300', 'green-400']
 
 export function BarChartGender() {
+  const [ group, setGroup ] = useState(2)
+
   return (
     <BarChart
         className='min-h-full h-max'

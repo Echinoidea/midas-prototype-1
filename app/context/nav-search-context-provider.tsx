@@ -10,13 +10,6 @@ export const SearchContextProvider = ({ children }: {children: ReactNode}) => {
   const [ selectedClassroom, setSelectedClassroom ] = useState<string>('');
   const [ selectedStudent, setSelectedStudy ] = useState<string>('');
 
-  // WORKING FOR ONE STATE
-  // return (
-  //   <SearchContext.Provider value={{ selectedSchool, setSelectedSchool }}>
-  //     {children}
-  //   </SearchContext.Provider>
-  // );
-
   return (
     <SearchContext.Provider value={{ 
         school: [ selectedSchool, setSelectedSchool ], 

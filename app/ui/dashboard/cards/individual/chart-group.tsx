@@ -1,9 +1,10 @@
 
 import { Key, useState } from "react";
-import { BarChartEnglishLearner, BarChartEthnicity, BarChartGender } from "../../../charts/total-demographics-charts";
+import { BarChartEnglishLearner, BarChartEthnicity} from "../../../charts/total-demographics-charts";
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem, Card } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { Nunito } from "next/font/google";
+import { BarChartGender } from "@/app/ui/charts/individual-demographics-charts";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function Capitalize(str: string){
@@ -11,7 +12,7 @@ function Capitalize(str: string){
 }
 
 
-export function PopToRiskCharts() {
+export function RiskCharts() {
   const [ genderRiskSample, setGenderRiskSample ] = useState('high')
   const [ ethnicityRiskSample, setEthnicityRiskSample ] = useState('high')
   const [ ellRiskSample, setEllRiskSample ] = useState('high')
