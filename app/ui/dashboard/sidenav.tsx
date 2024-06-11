@@ -33,7 +33,7 @@ export default function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 max-sm:w-fit">
         <NavLinks collapsed={collapsed}/>
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-          <button className='bg-gray-50 rounded-md' onClick={() => setCollapsed(!collapsed)}>
+          <button className='bg-gray-50 rounded-md max-md:hidden' onClick={() => setCollapsed(!collapsed)}>
             {!collapsed ? <p className='text-3xl'>&larr;</p> : <p className='text-3xl'>&rarr;</p>}
           </button>
           <form>

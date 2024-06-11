@@ -75,7 +75,7 @@ export default async function Page() {
           </div>
 
           <div className='flex flex-col justify-start'>
-            <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]}/>
+            <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]} missingVariables={2}/>
           </div>
 
           {/* <div className='flex flex-col justify-start basis-1/6'>

@@ -11,11 +11,11 @@ export function CardMidasRisk({
 }) {
 
   return (
-    <Card className={`${nunito.className} bg-neutral-100 w-full`} shadow='md'>
+    <Card className={`${nunito.className} bg-neutral-100 w-full pb-4`} shadow='md'>
       <CardHeader>
         <h3 className="text-lg font-medium text-slate-800">MIDAS Risk Score</h3>
       </CardHeader>
-      <CardBody className='flex items-center -mt-1'>
+      <CardBody className='flex items-center -mt-2 '>
         <p className={`${nunito.className} font-semibold text-3xl`}>{midasRisk}</p>
       </CardBody>
     </Card>

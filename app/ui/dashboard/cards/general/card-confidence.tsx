@@ -1,5 +1,11 @@
-
-import { Card, CardBody, CardHeader, Tooltip, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Divider, Table, TableColumn, TableHeader, TableBody, TableRow, TableCell } from '@nextui-org/react';
+import { 
+  Tooltip, 
+  Button, 
+  useDisclosure, 
+  Divider, 
+  Card, CardBody, CardHeader, 
+  Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, 
+  Table, TableColumn, TableHeader, TableBody, TableRow, TableCell } from '@nextui-org/react';
 import { ConfidenceIntervalVisualizer } from '../../confidence-visualizer';
 import { Nunito } from "next/font/google";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
@@ -17,9 +23,11 @@ function TooltipContent() {
 export function CardConfidenceVisualizer({
   confidence,
   confidenceThresholds,
+  missingVariables,
 }: {
   confidence: number;
   confidenceThresholds: number[];
+  missingVariables: number;
 }) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -27,26 +35,18 @@ export function CardConfidenceVisualizer({
       <Tooltip content={TooltipContent()} placement='bottom' className='h-full'>
         <div onClick={onOpen}>
           <Card className={`${nunito.className} rounded-xl bg-neutral-100 h-full`} shadow='md'>
-            <CardHeader className=''>
+            <CardHeader className='flex flex-col'>
               <h3 className="text-lg font-medium text-slate-800"> MIDAS Risk Confidence </h3>
+              
             </CardHeader>
             
             <CardBody className='px-4 -mt-4 w-full -mb-4'>
-              {/* <div className='flex flex-col items-center  pb-4'>
-                <p className='text-md'> Missing Variables </p>
-                <p className='text-4xl'> {1} </p>
-              </div>
-
-              <Divider className='mt-0 mb-1'/> */}
-
               <div className='flex flex-col items-center pb-4'>
-                {/* <p className='text-md'> Prediction Confidence </p> */}
                 <p className='text-4xl'> {confidence + "%"} </p>
                 <ConfidenceIntervalVisualizer confidence={confidence} thresholds={confidenceThresholds}/>
               </div>
+              <p className='italic -mt-2 mr-0 ml-auto pr-0 pb-1 text-sm '>Click to see more information</p>
             </CardBody>
-
-            
           </Card>
           
           <Modal className={nunito.className} isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' scrollBehavior='inside'>
@@ -62,7 +62,10 @@ export function CardConfidenceVisualizer({
                       then the confidence will be more significantly affected than if their English Language Learner status is missing. 
                       
                       <br/><br/>
-                      Below is a breakdown of the weights of each variable. 
+                      Below is a breakdown of the weights of each variable.
+
+                      <span className='text-xl font-semibold'>Missing values: {missingVariables}</span>
+
                     </div>
 
                     <Divider/>
@@ -102,11 +105,19 @@ export function CardConfidenceVisualizer({
                           <TableCell className='text-xl'>Low</TableCell>
                         </TableRow>
                         <TableRow key='8'>
-                          <TableCell className='text-xl'>Saebrs</TableCell>
+                          <TableCell className='text-xl'>Saebrs/MySaebrs Total</TableCell>
                           <TableCell className='text-xl'>Low</TableCell>
                         </TableRow>
                         <TableRow key='9'>
-                          <TableCell className='text-xl'>MySaebrs</TableCell>
+                          <TableCell className='text-xl'>Saebrs/MySaebrs Emotional</TableCell>
+                          <TableCell className='text-xl'>Low</TableCell>
+                        </TableRow>
+                        <TableRow key='10'>
+                          <TableCell className='text-xl'>Saebrs/MySaebrs Social</TableCell>
+                          <TableCell className='text-xl'>Low</TableCell>
+                        </TableRow>
+                        <TableRow key='11'>
+                          <TableCell className='text-xl'>Saebrs/MySaebrs Academic</TableCell>
                           <TableCell className='text-xl'>Low</TableCell>
                         </TableRow>
                       </TableBody>
