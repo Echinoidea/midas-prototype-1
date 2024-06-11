@@ -51,7 +51,7 @@ function Row({
     <div className=''>
       <p className='items-start'>{header}</p>
       <div className="flex flex-col items-center text-xl">
-        <p className='text-3xl'>{content}</p>
+        <p className={`${nunito.className} text-3xl`}>{content}</p>
       </div>
     </div>
   )

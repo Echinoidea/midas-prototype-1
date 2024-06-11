@@ -1,4 +1,4 @@
-import { Card, CardBody,  CardHeader,  Divider } from '@nextui-org/react';
+import { Card, CardBody,  CardHeader,  Divider, Tooltip } from '@nextui-org/react';
 import React from 'react';
 
 import { Nunito } from "next/font/google";
@@ -16,7 +16,7 @@ function Row({
     <div className=''>
       <p className='items-start font-normal text-xl'>{header}</p>
       <div className="flex flex-col items-center text-xl">
-        {content}
+      <p className='text-2xl'>{content}</p>
       </div>
     </div>
   )
@@ -36,9 +36,19 @@ export function CardStudentDiscipline({
         <h3 className="text-lg font-medium text-slate-800">Disciplinary Summary</h3>
       </CardHeader>
       <CardBody className={`${nunito.className} flex gap-1 justify-center -mt-2`}>
-        <Row header="ODRs" content={odr}/>
+        <Tooltip content={"ODR tooltip"} placement='bottom'>
+          <div>
+            <Row header="ODRs" content={odr}/>
+          </div>
+        </Tooltip>
+        
         <Divider/>
-        <Row header="Suspensions" content={suspensions}/>
+
+        <Tooltip content={"Suspensions tooltip"} placement="bottom">
+          <div>
+            <Row header="Suspensions" content={suspensions}/>
+          </div>
+        </Tooltip>
       </CardBody>
     </Card>
   );

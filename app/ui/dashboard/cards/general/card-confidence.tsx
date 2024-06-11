@@ -42,7 +42,7 @@ export function CardConfidenceVisualizer({
             
             <CardBody className='px-4 -mt-4 w-full -mb-4'>
               <div className='flex flex-col items-center pb-4'>
-                <p className='text-4xl'> {confidence + "%"} </p>
+                <p className='text-3xl'> {confidence + "%"} </p>
                 <ConfidenceIntervalVisualizer confidence={confidence} thresholds={confidenceThresholds}/>
               </div>
               <p className='italic -mt-2 mr-0 ml-auto pr-0 pb-1 text-sm '>Click to see more information</p>
