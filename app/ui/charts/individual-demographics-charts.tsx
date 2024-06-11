@@ -1,115 +1,127 @@
-'use client';
-
-import { DonutChart, Card, Legend, BarChart } from '@tremor/react'
-import { useState } from 'react';
-// import BarChart from "@tremor/react";
-
- 
+import { ResponsivePie } from '@nivo/pie';
 
 const genderDataPlaceholder = [
   {
-    Gender: 'Male',
-    'High Risk': 40,
-    'Some Risk': 200,
-    'Low Risk': 180
+    id: "Male",
+    value: 500
   },
   {
-    Gender: 'Female',
-    'High Risk': 30,
-    'Some Risk': 56,
-    'Low Risk': 300
-  },
+    id: "Female",
+    value: 548
+  }
 ]
 
 const ethnicityDataPlaceholder = [
-  
   {
-    Ethnicity: 'White',
-    'High Risk': 58,
-    'Some Risk': 200,
-    'Low Risk': 100
+    id: 'White',
+    value: 358
   },
   {
-    Ethnicity: 'Hispanic',
-    'High Risk': 20,
-    'Some Risk': 150,
-    'Low Risk': 130
+    id: 'Hispanic',
+    value: 300
   },
   {
-    Ethnicity: 'Other POC',
-    'High Risk': 33,
-    'Some Risk': 156,
-    'Low Risk': 200
-  },
+    id: 'Other POC',
+    value: 390
+  }
 ]
 
 const englishLearnerDataPlaceholder = [
   {
-    ELL: 'ELL',
-    'High Risk': 58,
-    'Some Risk': 200,
-    'Low Risk': 100
+    id: "ELL",
+    value: 800
   },
   {
-    ELL: 'Not ELL',
-    'High Risk': 20,
-    'Some Risk': 150,
-    'Low Risk': 130
-  },
+    id: "Not ELL",
+    value: 248
+  }
 ]
 
-const colors = ['red-400', 'yellow-300', 'green-400']
+export function DonutChartGender({selectedSlice}: {selectedSlice: string}) {
 
-export function BarChartGender() {
-  const [ group, setGroup ] = useState(2)
-
+  const colors = ['#f87171', '#a5f3fc']
   return (
-    <BarChart
-        className='min-h-full h-max'
-        data={genderDataPlaceholder}
-        index='Gender'
-        categories={['High Risk', 'Some Risk', 'Low Risk']}
-        colors={colors}
-        layout='horizontal'
-        yAxisWidth={50}
-        stack={true}
-        tickGap={25}
-        barCategoryGap={40}
-      />
-    
+    <ResponsivePie
+      data={genderDataPlaceholder}
+      margin={{ top: 0, right: 90, bottom: 0, left: 90 }}
+      innerRadius={0.6}
+      padAngle={0.7}
+      cornerRadius={3}
+      activeOuterRadiusOffset={12} // This expands the active slice
+      colors={({ id }) => {
+        const index = genderDataPlaceholder.findIndex(d => d.id === id);
+        return colors[index % colors.length];
+      }}
+      borderWidth={1}
+      borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+      arcLinkLabelsTextColor="#333333"
+      arcLinkLabelsThickness={2}
+      arcLinkLabelsColor={{ from: 'color' }}
+      arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+      activeId={selectedSlice}
+      onClick={(node, event) => {
+        console.log(node);
+      }}
+    />
   )
 }
 
-export function BarChartEthnicity() {
+export function DonutChartEthnicity({selectedSlice}: {selectedSlice: string}) {
+  const colors = ['#f87171', '#a5f3fc', '#4ade80']
+  
   return (
 
-      <BarChart
-        className='min-h-full h-max'
-        data={ethnicityDataPlaceholder}
-        index='Ethnicity'
-        categories={['High Risk', 'Some Risk', 'Low Risk']}
-        colors={colors}
-        layout='horizontal'
-        yAxisWidth={50}
-        stack={true}
-        barCategoryGap={16}
-      />
+    <ResponsivePie
+    data={ethnicityDataPlaceholder}
+    margin={{ top: 0, right: 90, bottom: 0, left: 90 }}
+    innerRadius={0.6}
+    padAngle={0.7}
+    cornerRadius={3}
+    activeOuterRadiusOffset={12} // This expands the active slice
+    colors={({ id }) => {
+      const index = ethnicityDataPlaceholder.findIndex(d => d.id === id);
+      return colors[index % colors.length];
+    }}
+    borderWidth={1}
+    borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+    arcLinkLabelsTextColor="#333333"
+    arcLinkLabelsThickness={2}
+    arcLinkLabelsColor={{ from: 'color' }}
+    arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+    activeId={selectedSlice}
+    onClick={(node, event) => {
+      console.log(node);
+    }}
+  />
   )
 }
 
-export function BarChartEnglishLearner() {
+export function DonutChartEnglishLearner({selectedSlice}: {selectedSlice: string}) {
+  const colors = ['#f87171', '#a5f3fc', '#4ade80']
+  
   return (
 
-    <BarChart
-      className='min-h-full h-max'
+    <ResponsivePie
       data={englishLearnerDataPlaceholder}
-      index='ELL'
-      categories={['High Risk', 'Some Risk', 'Low Risk']}
-      colors={colors}
-      layout='horizontal'
-      yAxisWidth={50}
-      stack={true}
-      barCategoryGap={40}
+      margin={{ top: 0, right: 90, bottom: 0, left: 90 }}
+      innerRadius={0.6}
+      padAngle={0.7}
+      cornerRadius={3}
+      activeOuterRadiusOffset={12} // This expands the active slice
+      colors={({ id }) => {
+        const index = englishLearnerDataPlaceholder.findIndex(d => d.id === id);
+        return colors[index % colors.length];
+      }}
+      borderWidth={1}
+      borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+      arcLinkLabelsTextColor="#333333"
+      arcLinkLabelsThickness={2}
+      arcLinkLabelsColor={{ from: 'color' }}
+      arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+      activeId={selectedSlice}
+      onClick={(node, event) => {
+        console.log(node);
+      }}
     />
   )
 }

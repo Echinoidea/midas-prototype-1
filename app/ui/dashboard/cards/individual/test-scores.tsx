@@ -38,7 +38,7 @@ export function CardStudentTestScores({
       <CardBody className={`${nunito.className} flex gap-1 justify-center -mt-2`}>
         <Tooltip content="Math risk tooltip" placement='bottom'>
           <div>
-          <Row header="Math Risk" content={math}/>
+            <Row header="Math Risk" content={math}/>
           </div>
         </Tooltip>
 
