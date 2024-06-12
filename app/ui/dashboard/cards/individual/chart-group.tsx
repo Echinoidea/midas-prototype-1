@@ -1,15 +1,52 @@
 
 import { Key, useState } from "react";
-import { BarChartEnglishLearner, BarChartEthnicity} from "../../../charts/total-demographics-charts";
+import { BarChart } from "../../../charts/bar-chart";
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem, Card } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { Nunito } from "next/font/google";
-import {  DonutChartEnglishLearner, DonutChartEthnicity, DonutChartGender } from "@/app/ui/charts/individual-demographics-charts";
+import {  DonutChart } from "@/app/ui/charts/donut-chart";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function Capitalize(str: string){
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+const genderDataPlaceholder = [
+  {
+    id: "Male",
+    value: 500
+  },
+  {
+    id: "Female",
+    value: 548
+  }
+]
+
+const ethnicityDataPlaceholder = [
+  {
+    id: 'White',
+    value: 358
+  },
+  {
+    id: 'Hispanic',
+    value: 300
+  },
+  {
+    id: 'Other POC',
+    value: 390
+  }
+]
+
+const englishLearnerDataPlaceholder = [
+  {
+    id: "ELL",
+    value: 800
+  },
+  {
+    id: "Not ELL",
+    value: 248
+  }
+]
 
 export function RiskCharts() {
   const [ genderRiskSample, setGenderRiskSample ] = useState('high')
@@ -24,7 +61,7 @@ export function RiskCharts() {
           <p className='text-2xl'>Male</p>
         </div>
         
-        <DonutChartGender selectedSlice={'Male'}/>
+        <DonutChart data={genderDataPlaceholder} colors={['#f87171', '#a5f3fc']} selectedSlice={'Male'}/>
       </Card>
 
       <Card className='flex flex-col bg-neutral-100 basis-1/3 rounded-xl pb-8 ' shadow='md'>
@@ -33,7 +70,7 @@ export function RiskCharts() {
           <p className='text-2xl'>English Learner</p>
         </div>
 
-        <DonutChartEnglishLearner selectedSlice={"ELL"}/>
+        <DonutChart data={englishLearnerDataPlaceholder} colors={['#4ade80', '#a3a3a3']} selectedSlice={'ELL'}/>
       </Card>
 
       <Card className='flex flex-col bg-neutral-100 basis-1/3 rounded-xl pb-8' shadow='md'>
@@ -42,7 +79,7 @@ export function RiskCharts() {
           <p className='text-2xl'>White</p>
         </div>
         
-        <DonutChartEthnicity selectedSlice={"White"} />
+        <DonutChart data={ethnicityDataPlaceholder} colors={['#f87171', '#a5f3fc', '#4ade80']} selectedSlice={'White'}/>
       </Card>
     </div>
   );
