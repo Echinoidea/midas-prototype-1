@@ -10,6 +10,7 @@ import {
 import { ConfidenceIntervalVisualizer } from '../../confidence-visualizer';
 import { Nunito } from "next/font/google";
 import { JSXElementConstructor, ReactElement } from 'react';
+import { VariableWeightCell } from '@/app/types/variable-weight-cell';
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function TooltipContent() {
@@ -22,17 +23,13 @@ function TooltipContent() {
   )
 }
 
-type VariableWeightItem = {
-  name: string;
-  weight: string;
-  missing: boolean;
-}
+
 
 function VariableWeightsTable({
   variables
 }:
 {
-  variables: VariableWeightItem[]
+  variables: VariableWeightCell[]
 }) {
 
   function mapTableBody() : ReactElement<TableBodyProps<object>, string | JSXElementConstructor<any>>{
@@ -41,7 +38,7 @@ function VariableWeightsTable({
 
     return (
       <TableBody>
-        {variables.map((variable: VariableWeightItem, index: number) => (
+        {variables.map((variable: VariableWeightCell, index: number) => (
           <TableRow key={index}>
             <TableCell className='text-xl'>{variable.name}</TableCell>
             {variable.missing ? missingTrue : missingFalse}

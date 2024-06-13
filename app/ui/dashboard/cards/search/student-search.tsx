@@ -11,6 +11,7 @@ import {
 import { Nunito } from "next/font/google";
 import SimpleLineIconsMagnifier from "@/app/ui/icons/SimpleLineIconsMagnifier";
 import { DonutChart } from "@/app/ui/charts/donut-chart";
+import { StudentDemographics } from "@/app/types/student-demographics";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 const genderDataPlaceholder = [
@@ -50,52 +51,62 @@ const englishLearnerDataPlaceholder = [
   }
 ]
 
-function Row({
-  header,
-  content,
-}:
-{
-  header: string;
-  content: string;
-}) {
-  return (
-    <div className='flex flex-row'>
-      <p className='ml-0 mr-auto font-normal text-xl'>{header}</p>
-      <div className="ml-auto mr-0 text-xl">
-        {content}
-      </div>
-    </div>
-  )
-}
-
 function DemographicsRow({
   content,
 }:
 {
-  content: [string, string, string]
+  content: StudentDemographics
 }) {
   return (
     <div className='flex flex-row '>
-      <Tooltip content={<DonutChart data={genderDataPlaceholder} colors={['#f87171', '#a5f3fc']} selectedSlice={'Male'}/>}>
-        <div className='flex basis-1/3 justify-center'>
-          {content[0]}
-        </div>
-      </Tooltip>
-
-      
-      <DonutChart data={ethnicityDataPlaceholder} colors={['#f87171', '#a5f3fc', '#4ade80']} selectedSlice={'White'}/>
-      
-      <Divider orientation="vertical"/>
-
-      <Tooltip content={<DonutChart data={englishLearnerDataPlaceholder} colors={['#4ade80', '#a3a3a3']} selectedSlice={'ELL'}/>}>
-        <div className='flex basis-1/3 justify-center'>
-          {content[1]}
-        </div>
-      </Tooltip>
-      <Divider orientation="vertical"/>
-      <div className='flex basis-1/3 justify-center'>
-        {content[2]}
+      <div className='flex basis-1/4 justify-center'>
+        {content.grade}
       </div>
+
+      <Divider orientation="vertical"/>
+
+      <Tooltip className="bg-neutral-100" 
+        content={
+          <div className='w-96 h-96'>
+            <p className='text-xl -mb-4'>School gender demographics</p>
+            <DonutChart data={genderDataPlaceholder} colors={['#f87171', '#a5f3fc']} selectedSlice={'Male'}/>
+          </div>
+        } 
+        placement='bottom'>
+        <div className='flex basis-1/3 justify-center'>
+          {content.gender}
+        </div>
+      </Tooltip>
+
+      <Divider orientation="vertical"/>
+
+      <Tooltip className="bg-neutral-100" 
+        content={
+          <div className='w-96 h-96'>
+            <p className='text-xl -mb-4'>School English-learner demographics</p>
+            <DonutChart data={englishLearnerDataPlaceholder} colors={['#4ade80', '#a3a3a3']} selectedSlice={'ELL'}/>
+          </div>
+        } 
+        placement='bottom'>
+        <div className='flex basis-1/3 justify-center'>
+          {content.ell}
+        </div>
+      </Tooltip>
+
+      <Divider orientation="vertical"/>
+
+      <Tooltip className="bg-neutral-100" 
+        content={
+          <div className='w-96 h-96'>
+            <p className='text-xl -mb-4'>School ethnicity demographics</p>
+            <DonutChart data={ethnicityDataPlaceholder} colors={['#f87171', '#a5f3fc', '#4ade80']} selectedSlice={'White'}/>
+          </div>
+        } 
+        placement='bottom'>
+        <div className='flex basis-1/3 justify-center'>
+          {content.ethnicity}
+        </div>
+      </Tooltip>
     </div>
   )
 }
@@ -103,8 +114,6 @@ function DemographicsRow({
 export default function StudentSearch({
   selectedStudent,
   setSelectedStudent,
-  classroomId,
-  gradeLevel,
 }: {
   selectedStudent: string;
   setSelectedStudent : React.Dispatch<React.SetStateAction<string>>;
@@ -132,11 +141,7 @@ export default function StudentSearch({
                 </Button>
               </div>
             </form>
-            <Row header="Classroom ID" content={classroomId}/>
-            <Divider/>
-            <Row header="Grade Level" content={gradeLevel}/>
-            <Divider className='mb-2'/>
-            <DemographicsRow content={['Male', 'White', 'ELL']}/>
+            <DemographicsRow content={{grade: '8', gender: 'Male', ell: 'ELL', ethnicity: 'White'}}/>
           </div>
         </CardBody>
       </Card>
