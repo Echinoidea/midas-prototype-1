@@ -5,9 +5,11 @@ import {
   Divider, 
   Card, CardBody, CardHeader, 
   Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, 
-  Table, TableColumn, TableHeader, TableBody, TableRow, TableCell } from '@nextui-org/react';
+  Table, TableColumn, TableHeader, TableBody, TableRow, TableCell, 
+  TableBodyProps} from '@nextui-org/react';
 import { ConfidenceIntervalVisualizer } from '../../confidence-visualizer';
 import { Nunito } from "next/font/google";
+import { JSXElementConstructor, ReactElement } from 'react';
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
 
 function TooltipContent() {
@@ -19,6 +21,106 @@ function TooltipContent() {
     </div>
   )
 }
+
+type VariableWeightItem = {
+  name: string;
+  weight: string;
+  missing: boolean;
+}
+
+function VariableWeightsTable({
+  variables
+}:
+{
+  variables: VariableWeightItem[]
+}) {
+
+  function mapTableBody() : ReactElement<TableBodyProps<object>, string | JSXElementConstructor<any>>{
+    const missingTrue = <TableCell className='text-xl text-red-400'>Missing!</TableCell>
+    const missingFalse = <TableCell className='text-xl'>{undefined}</TableCell>
+
+    return (
+      <TableBody>
+        {variables.map((variable: VariableWeightItem, index: number) => (
+          <TableRow key={index}>
+            <TableCell className='text-xl'>{variable.name}</TableCell>
+            {variable.missing ? missingTrue : missingFalse}
+            <TableCell className='text-xl'>{variable.weight}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    );
+  }
+
+  return (
+    <Table>
+      <TableHeader>
+          <TableColumn className='text-2xl'>Variable</TableColumn>
+          <TableColumn className='text-2xl'>Missing?</TableColumn>
+          <TableColumn className='text-2xl'>Weight</TableColumn>
+      </TableHeader>
+      {mapTableBody()}
+    </Table>
+  )
+}
+
+const variables = [
+  {  
+    name: 'Gender',
+    weight: 'Low',
+    missing: true
+  },
+  {  
+    name: 'Ethnicity',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'English Learner',
+    weight: 'Low',
+    missing: true
+  },
+  {  
+    name: 'Office Disciplinary Referrals',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Suspensions',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Math Test Risk',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Reading Test Risk',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Saebrs/MySaebrs Total',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Saebrs/MySaebrs Social',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Saebrs/MySaebrs Emotional',
+    weight: 'Low',
+    missing: false
+  },
+  {  
+    name: 'Saebrs/MySaebrs Academic',
+    weight: 'Low',
+    missing: false
+  },
+]
 
 export function CardConfidenceVisualizer({
   confidence,
@@ -70,58 +172,8 @@ export function CardConfidenceVisualizer({
 
                     <Divider/>
 
-                    <Table className='text-lg'>
-                      <TableHeader>
-                        <TableColumn className='text-2xl'>Variable</TableColumn>
-                        <TableColumn className='text-2xl'>Weight</TableColumn>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow key='1'>
-                          <TableCell className='text-xl'>Gender</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='2'>
-                          <TableCell className='text-xl'>Ethnicity</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='3'>
-                          <TableCell className='text-xl'>English Learner Status</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='4'>
-                          <TableCell className='text-xl'>Office Disciplinary Referrals</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='5'>
-                          <TableCell className='text-xl'>Suspensions</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='6'>
-                          <TableCell className='text-xl'>Math Scores</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='7'>
-                          <TableCell className='text-xl'>Reading Scores</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='8'>
-                          <TableCell className='text-xl'>Saebrs/MySaebrs Total</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='9'>
-                          <TableCell className='text-xl'>Saebrs/MySaebrs Emotional</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='10'>
-                          <TableCell className='text-xl'>Saebrs/MySaebrs Social</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                        <TableRow key='11'>
-                          <TableCell className='text-xl'>Saebrs/MySaebrs Academic</TableCell>
-                          <TableCell className='text-xl'>Low</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <VariableWeightsTable variables={variables}/>
+                    
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>

@@ -5,11 +5,50 @@ import {
   CardHeader, 
   Input,
   Button,
-  Divider
+  Divider,
+  Tooltip
 } from "@nextui-org/react";
 import { Nunito } from "next/font/google";
 import SimpleLineIconsMagnifier from "@/app/ui/icons/SimpleLineIconsMagnifier";
+import { DonutChart } from "@/app/ui/charts/donut-chart";
 const nunito = Nunito({weight: ['200', '200'], subsets:['latin'], style: ['normal', 'italic']})
+
+const genderDataPlaceholder = [
+  {
+    id: "Male",
+    value: 500
+  },
+  {
+    id: "Female",
+    value: 548
+  }
+]
+
+const ethnicityDataPlaceholder = [
+  {
+    id: 'White',
+    value: 358
+  },
+  {
+    id: 'Hispanic',
+    value: 300
+  },
+  {
+    id: 'Other POC',
+    value: 390
+  }
+]
+
+const englishLearnerDataPlaceholder = [
+  {
+    id: "ELL",
+    value: 800
+  },
+  {
+    id: "Not ELL",
+    value: 248
+  }
+]
 
 function Row({
   header,
@@ -24,6 +63,38 @@ function Row({
       <p className='ml-0 mr-auto font-normal text-xl'>{header}</p>
       <div className="ml-auto mr-0 text-xl">
         {content}
+      </div>
+    </div>
+  )
+}
+
+function DemographicsRow({
+  content,
+}:
+{
+  content: [string, string, string]
+}) {
+  return (
+    <div className='flex flex-row '>
+      <Tooltip content={<DonutChart data={genderDataPlaceholder} colors={['#f87171', '#a5f3fc']} selectedSlice={'Male'}/>}>
+        <div className='flex basis-1/3 justify-center'>
+          {content[0]}
+        </div>
+      </Tooltip>
+
+      
+      <DonutChart data={ethnicityDataPlaceholder} colors={['#f87171', '#a5f3fc', '#4ade80']} selectedSlice={'White'}/>
+      
+      <Divider orientation="vertical"/>
+
+      <Tooltip content={<DonutChart data={englishLearnerDataPlaceholder} colors={['#4ade80', '#a3a3a3']} selectedSlice={'ELL'}/>}>
+        <div className='flex basis-1/3 justify-center'>
+          {content[1]}
+        </div>
+      </Tooltip>
+      <Divider orientation="vertical"/>
+      <div className='flex basis-1/3 justify-center'>
+        {content[2]}
       </div>
     </div>
   )
@@ -64,6 +135,8 @@ export default function StudentSearch({
             <Row header="Classroom ID" content={classroomId}/>
             <Divider/>
             <Row header="Grade Level" content={gradeLevel}/>
+            <Divider className='mb-2'/>
+            <DemographicsRow content={['Male', 'White', 'ELL']}/>
           </div>
         </CardBody>
       </Card>
