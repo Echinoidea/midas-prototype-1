@@ -51,6 +51,26 @@ const englishLearnerDataPlaceholder = [
   }
 ]
 
+
+function DemographicsBox({
+  label,
+  content
+}:
+{
+  label: string;
+  content: string;
+}) {
+  return (
+    <div className='flex flex-col basis-1/4'>
+      <p className='ml-0.5'>{label}</p>
+      <div className='flex justify-center items-center'>
+        <p className="text-xl mt-2">{content}</p>
+      </div>
+    </div>
+  )
+}
+
+
 function DemographicsRow({
   content,
   className
@@ -61,9 +81,7 @@ function DemographicsRow({
 }) {
   return (
     <div className={'flex flex-row ' + className}>
-      <div className='flex basis-1/4 justify-center items-center'>
-        <p className="text-xl">{content.grade}</p>
-      </div>
+      <DemographicsBox label='Grade' content={content.grade} />
 
       <Divider orientation="vertical"/>
 
@@ -75,9 +93,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center items-center'>
-          <p className="text-xl">{content.gender}</p>
-        </div>
+
+          <DemographicsBox label='Gender' content={content.gender} />
       </Tooltip>
 
       <Divider orientation="vertical"/>
@@ -90,9 +107,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center items-center'>
-          <p className="text-xl">{content.ell}</p>
-        </div>
+
+          <DemographicsBox label='English Learner?' content={content.ell} />
       </Tooltip>
 
       <Divider orientation="vertical"/>
@@ -105,9 +121,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center items-center'>
-          <p className="text-xl">{content.ethnicity}</p>
-        </div>
+          
+          <DemographicsBox label='Ethnicity' content={content.ethnicity} />
       </Tooltip>
     </div>
   )

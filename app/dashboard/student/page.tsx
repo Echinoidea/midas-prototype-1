@@ -1,12 +1,9 @@
 'use client';
 
-
-
 import { CardConfidenceVisualizer } from '@/app/ui/dashboard/cards/general/card-confidence';
 import { useEffect, useState } from 'react';
 import { useSearchContext } from '@/app/context/nav-search-context';
 import StudentSearch from '@/app/ui/dashboard/cards/search/student-search';
-import { RiskCharts } from '@/app/ui/dashboard/cards/individual/chart-group';
 import { CardMidasRisk } from '@/app/ui/dashboard/cards/individual/midas-summary';
 import { CardStudentDiscipline } from '@/app/ui/dashboard/cards/individual/disciplinary';
 import { CardStudentTestScores } from '@/app/ui/dashboard/cards/individual/test-scores';
@@ -60,6 +57,7 @@ export default async function Page() {
     <main>
       <div className='flex flex-col gap-4'>
 
+        {/* Top row */}
         <div className='flex flex-row gap-8 w-full'>
           <div className='flex basis-1/3 w-full'>
             <StudentSearch 
@@ -80,6 +78,7 @@ export default async function Page() {
         </div>
 
 
+        {/* Second row */}
         <div className='flex flex-row gap-4 w-full'>
           <div className='flex flex-col gap-2 basis-1/5'>
             <CardMidasRisk midasRisk={midasRisk} />
