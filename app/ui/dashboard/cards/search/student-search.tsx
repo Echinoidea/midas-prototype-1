@@ -53,14 +53,16 @@ const englishLearnerDataPlaceholder = [
 
 function DemographicsRow({
   content,
+  className
 }:
 {
-  content: StudentDemographics
+  content: StudentDemographics;
+  className?: string;
 }) {
   return (
-    <div className='flex flex-row '>
-      <div className='flex basis-1/4 justify-center'>
-        {content.grade}
+    <div className={'flex flex-row ' + className}>
+      <div className='flex basis-1/4 justify-center items-center'>
+        <p className="text-xl">{content.grade}</p>
       </div>
 
       <Divider orientation="vertical"/>
@@ -73,8 +75,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center'>
-          {content.gender}
+        <div className='flex basis-1/3 justify-center items-center'>
+          <p className="text-xl">{content.gender}</p>
         </div>
       </Tooltip>
 
@@ -88,8 +90,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center'>
-          {content.ell}
+        <div className='flex basis-1/3 justify-center items-center'>
+          <p className="text-xl">{content.ell}</p>
         </div>
       </Tooltip>
 
@@ -103,8 +105,8 @@ function DemographicsRow({
           </div>
         } 
         placement='bottom'>
-        <div className='flex basis-1/3 justify-center'>
-          {content.ethnicity}
+        <div className='flex basis-1/3 justify-center items-center'>
+          <p className="text-xl">{content.ethnicity}</p>
         </div>
       </Tooltip>
     </div>
@@ -127,7 +129,7 @@ export default function StudentSearch({
   }
 
   return (
-    <Card className="bg-neutral-100 pb-1" shadow='md'>
+    <Card className="bg-neutral-100 pb-1 w-full" shadow='md'>
         <CardHeader className={nunito.className}>
           <h3 className="text-lg font-medium text-slate-800">Currently viewing student </h3>&nbsp;<span className="font-extrabold underline">{selectedStudent}</span>
         </CardHeader>
@@ -141,7 +143,8 @@ export default function StudentSearch({
                 </Button>
               </div>
             </form>
-            <DemographicsRow content={{grade: '8', gender: 'Male', ell: 'ELL', ethnicity: 'White'}}/>
+
+            <DemographicsRow content={{grade: '8', gender: 'Male', ell: 'ELL', ethnicity: 'White'}} className="mb-0 mt-auto h-full"/>
           </div>
         </CardBody>
       </Card>

@@ -113,7 +113,7 @@ export function SaebrsSummary({
 // min-w-fit max-w-sm on tooltip className if break
   return (
       // MAIN ROW
-      <div className={`${nunito.className} flex flex-col gap-4 lg:flex-row  `}>
+      <div className={`${nunito.className} flex flex-col gap-4 lg:flex-row w-full `}>
         
           
           <CardSaebrs header="total" saebrs={saebrsTotal} mySaebrs={mySaebrsTotal} tooltip="Total tooltip"/>

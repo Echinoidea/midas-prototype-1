@@ -58,10 +58,10 @@ export default async function Page() {
 
   return (
     <main>
-      <div className='flex md:flex-row flex-col gap-4'>
-        {/* LEFT COL */}
-        <div className="flex flex-col justify-normal gap-3 basis-1/4">
-          <div className='flex flex-col justify-start'>
+      <div className='flex flex-col gap-4'>
+
+        <div className='flex flex-row gap-8 w-full'>
+          <div className='flex basis-1/3 w-full'>
             <StudentSearch 
               selectedStudent={selectedStudent} 
               setSelectedStudent={setSelectedStudent} 
@@ -69,26 +69,24 @@ export default async function Page() {
               gradeLevel={identification.gradeLevel}
             />
           </div>
-
-          <div className='flex flex-col justify-start'>
-              <CardMidasRisk midasRisk={midasRisk} />
-          </div>
-
-          <div className='flex flex-col justify-start'>
-            <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]} missingVariables={2}/>
-          </div>
-
-          <div className='flex flex-col justify-start basis-1/6'>
+          
+          <div className='flex basis-1/3 w-full'>
             <CardStudentDiscipline odr={disciplineRisk.odr} suspensions={disciplineRisk.suspensions} />
           </div>
 
-          <div className='flex flex-col basis-1/6'>
+          <div className='flex basis-1/3 w-full'>
             <CardStudentTestScores math={testRisk.math} reading={testRisk.reading} />
           </div>
         </div>
 
-        <div className='flex flex-col gap-3.5 basis-3/4'>
-            <div className='flex flex-col basis-1/6'>
+
+        <div className='flex flex-row gap-4 w-full'>
+          <div className='flex flex-col gap-2 basis-1/5'>
+            <CardMidasRisk midasRisk={midasRisk} />
+            <CardConfidenceVisualizer confidence={90} confidenceThresholds={[85, 90, 95, 99]} missingVariables={2}/>
+          </div>
+
+          <div className='flex flex-row w-max basis-4/5'>
             <SaebrsSummary 
               saebrsTotal={saebrsRisk.saebrsTotal} 
               mySaebrsTotal={saebrsRisk.mySaebrsTotal} 
@@ -99,20 +97,9 @@ export default async function Page() {
               saebrsAcademic={saebrsRisk.saebrsAcademic} 
               mySaebrsAcademic={saebrsRisk.mySaebrsAcademic}
             />
-            </div>
-
-            <div className='flex flex-col basis-5/6 pb-4 max-lg:hidden'>
-              <RiskCharts/>
-            </div>
-        </div>  
-
-        <div className='flex flex-col lg:hidden h-96'>
-          <RiskCharts/>
+          </div>
         </div>
       </div>
-
-      
     </main>
   );
 }
-
