@@ -1,4 +1,3 @@
-
 import { Key, useState } from "react";
 import { BarChart } from "../../../charts/bar-chart";
 import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem, Card } from "@nextui-org/react";
@@ -44,6 +43,7 @@ const ethnicityDataPlaceholder = [
   }
 ]
 
+
 const englishLearnerDataPlaceholder = [
   {
     id: 'ELL', // 250
@@ -59,7 +59,9 @@ const englishLearnerDataPlaceholder = [
   },
 ]
 
+
 const colors = ['red-400', 'yellow-300', 'green-400']
+
 
 export function PopToRiskCharts() {
   const [ genderRiskSample, setGenderRiskSample ] = useState('high')

@@ -9,6 +9,12 @@ import { CardStudentDiscipline } from '@/app/ui/dashboard/cards/individual/disci
 import { CardStudentTestScores } from '@/app/ui/dashboard/cards/individual/test-scores';
 import { SaebrsSummary } from '@/app/ui/dashboard/cards/individual/saebrs-summary';
 
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://kalbwmivszjzlnepcebm.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 export default async function Page() {
 
   const [ identification, setIdentification ] = useState({
