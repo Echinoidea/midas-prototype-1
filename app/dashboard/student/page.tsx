@@ -11,9 +11,13 @@ import { SaebrsSummary } from '@/app/ui/dashboard/cards/individual/saebrs-summar
 
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://kalbwmivszjzlnepcebm.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
+
+
+async function getUserNames() {
+  const { data: users } = await supabase.from("user").select();
+
+  return <pre>{JSON.stringify(users, null, 2)}</pre>
+}
 
 export default async function Page() {
 
@@ -51,13 +55,23 @@ export default async function Page() {
     'mySaebrsAcademic': 'Low',
   })
 
+  
+
+  const supabaseUrl = 'https://kalbwmivszjzlnepcebm.supabase.co'
+  const supabaseKey = process.env.SUPABASE_KEY
+  const supabase = createClient(supabaseUrl, supabaseKey)
+
   const stateStudent = useSearchContext('student')
   const selectedStudent = stateStudent.get
   const setSelectedStudent = stateStudent.set
+  const usernames = await getUserNames();
+  
+  // useEffect(() => {
+    
+    
+  // }, [selectedStudent]);
 
-  useEffect(() => {
-    console.log('Selected school:', selectedStudent);
-  }, [selectedStudent]);
+
 
   return (
     <main>
